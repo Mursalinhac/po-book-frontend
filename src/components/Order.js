@@ -8,99 +8,125 @@ function Order() {
         <Container fluid>
             <Row>
                 <Col md={7}>
+
+                    <div className="po-book-form">
+                        <h4 className="justify-content-center">Customer Info</h4>
+                        <Form >
+                            <Row className="mb-3">
+
+                                <Form.Group as={Col} controlId="formGridName">
+                                    <Form.Label>First Name</Form.Label>
+                                    <Form.Control placeholder="First Name" />
+                                </Form.Group>
+
+                                <Form.Group as={Col} controlId="formGridName">
+                                    <Form.Label>Last Name</Form.Label>
+                                    <Form.Control placeholder="Last Name" />
+                                </Form.Group>
+
+                                <Form.Group as={Col} controlId="formGridEmail">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control type="email" placeholder="Enter email" />
+                                </Form.Group>
+                            </Row>
+
+                            <Form.Group className="mb-3" controlId="formGridAddress1">
+                                <Form.Label>Address</Form.Label>
+                                <Form.Control placeholder="1234 Main St" />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formGridAddress2">
+                                <Form.Label>Address 2</Form.Label>
+                                <Form.Control placeholder="Apartment, studio, or floor" />
+                            </Form.Group>
+
+                            <Row className="mb-3">
+                                <Form.Group as={Col} controlId="formGridCity">
+                                    <Form.Label>City</Form.Label>
+                                    <Form.Control />
+                                </Form.Group>
+
+                                <Form.Group as={Col} controlId="formGridState">
+                                    <Form.Label>State</Form.Label>
+                                    <Form.Control />
+                                </Form.Group>
+
+                                <Form.Group as={Col} controlId="formGridZip">
+                                    <Form.Label>Zip</Form.Label>
+                                    <Form.Control />
+                                </Form.Group>
+                            </Row>
+                        </Form>
+                    </div>
+                    <br></br>
+
+                    <div className="po-book-form">
+                        <h4 className="justify-content-center">Select Model</h4>
+                        <Form>
+                            {['radio'].map((type) => (
+                                <div key={`inline-${type}`} className="mb-3">
+                                    <Form.Check
+
+                                        label="Corvette Stingray Coupe 1LT"
+                                        name="group1"
+                                        type={type}
+                                        id={`inline-${type}-1`}
+                                    />
+                                    <Form.Check
+
+                                        label="Corvette Stingray Coupe 2LT"
+                                        name="group1"
+                                        type={type}
+                                        id={`inline-${type}-1`}
+                                    />
+                                    <Form.Check
+
+                                        label="Corvette Stingray Coupe 3LT"
+                                        name="group1"
+                                        type={type}
+                                        id={`inline-${type}-1`}
+                                    />
+                                    <Form.Check
+
+                                        label="Corvette Stingray Convertible 1LT"
+                                        name="group1"
+                                        type={type}
+                                        id={`inline-${type}-1`}
+                                    />
+                                    <Form.Check
+
+                                        label="Corvette Stingray Convertible 2LT"
+                                        name="group1"
+                                        type={type}
+                                        id={`inline-${type}-1`}
+                                    />
+                                    <Form.Check
+
+                                        label="Corvette Stingray Convertible 3LT"
+                                        name="group1"
+                                        type={type}
+                                        id={`inline-${type}-1`}
+                                    />
+                                </div>
+                            ))}
+                        </Form>
+                    </div>
+                    <br></br>
                     <Accordion defaultActiveKey="0" flush>
-                        <Accordion.Item eventKey="0">
-                            <Accordion.Header>Customer info</Accordion.Header>
-                            <Accordion.Body>
-                                <Form>
-                                    <Row>
-                                        <Col>
-                                            <Form.Control placeholder="First name" />
-                                        </Col>
-                                        <Col>
-                                            <Form.Control placeholder="Last name" />
-                                        </Col>
-                                    </Row>
-                                </Form>
-                                <Form>
-                                    <Row className="mb-3">
-                                        <Form.Group as={Col} controlId="formGridEmail">
-                                            {/* <Form.Label>Email</Form.Label> */}
-                                            <Form.Control type="email" placeholder="Enter email" />
-                                        </Form.Group>
 
-                                        <Form.Group as={Col} controlId="formGridPassword">
-                                            {/* <Form.Label>Password</Form.Label> */}
-                                            <Form.Control type="password" placeholder="Password" />
-                                        </Form.Group>
-                                    </Row>
-
-                                    <Form.Group className="mb-3" controlId="formGridAddress1">
-                                        {/* <Form.Label>Address</Form.Label> */}
-                                        <Form.Control placeholder="1234 Main St" />
-                                    </Form.Group>
-
-                                    <Form.Group className="mb-3" controlId="formGridAddress2">
-                                        {/* <Form.Label>Address 2</Form.Label> */}
-                                        <Form.Control placeholder="Apartment, studio, or floor" />
-                                    </Form.Group>
-
-                                    <Row className="mb-3">
-                                        <Form.Group as={Col} controlId="formGridCity">
-                                            {/* <Form.Label>City</Form.Label> */}
-                                            <Form.Control placeholder="City" />
-                                            <Form.Control />
-                                        </Form.Group>
-
-                                        <Form.Group as={Col} controlId="formGridState">
-                                            {/* <Form.Label>State</Form.Label> */}
-                                            <Form.Control placeholder="State" />
-                                        </Form.Group>
-
-                                        <Form.Group as={Col} controlId="formGridZip">
-                                            {/* <Form.Label>Zip</Form.Label> */}
-                                            <Form.Control placeholder="Zip Code" />
-                                            <Form.Control />
-                                        </Form.Group>
-                                    </Row>
-                                </Form>
-                            </Accordion.Body>
-                        </Accordion.Item>
-
-                        <Accordion.Item eventKey="0">
-                            <Accordion.Header>Select Model</Accordion.Header>
-                            <Accordion.Body>
-                                <Form>
-                                    {['Corvette Stingray Coupe 1LT',
-                                        'Corvette Stingray Coupe 2LT',
-                                        'Corvette Stingray Coupe 3LT',
-                                        'Corvette Stingray Convertible 1LT',
-                                        'Corvette Stingray Convertible 2LT',
-                                        'Corvette Stingray Convertible 3LT'].map((type) => (
-                                            <div key={`default-${type}`} className="mb-3">
-                                                <Form.Check
-                                                    // type={type}
-                                                    id={`-${type}`}
-                                                    label={` ${type}`}
-                                                />
-                                            </div>
-                                        ))}
-                                </Form>
-                            </Accordion.Body>
-                        </Accordion.Item>
 
                         <Accordion.Item eventKey="1">
                             <Accordion.Header>Exterior Color</Accordion.Header>
                             <Accordion.Body>
                                 <>
-                                    <Button variant="outline-primary">Primary</Button>{' '}
-                                    <Button variant="outline-secondary">Secondary</Button>{' '}
-                                    <Button variant="outline-success">Success</Button>{' '}
-                                    <Button variant="outline-warning">Warning</Button>{' '}
-                                    <Button variant="outline-danger">Danger</Button>{' '}
-                                    <Button variant="outline-info">Info</Button>{' '}
-                                    <Button variant="outline-light">Light</Button>{' '}
-                                    <Button variant="outline-dark">Dark</Button>
+                                    <Button variant="outline-primary">Elkhart Lake Blue</Button>{' '}
+                                    <Button variant="outline-secondary">Hypersonic Gray Metallic</Button>{' '}
+                                    <Button variant="outline-success">Amplify Orange Tintcoat</Button>{' '}
+                                    <Button variant="outline-warning">Accelerate Yellow Metallic</Button>{' '}
+                                    <Button variant="outline-danger">Torch Red</Button>{' '}
+                                    <Button variant="outline-info">Rapid Blue</Button>{' '}
+                                    <Button variant="outline-light">Arctic White</Button>{' '}
+                                    <Button variant="outline-dark">Black</Button>
                                 </>
                             </Accordion.Body>
                         </Accordion.Item>
@@ -356,7 +382,7 @@ function Order() {
                 <Col md={5}></Col>
             </Row>
 
-        </Container>
+        </Container >
     );
 }
 
