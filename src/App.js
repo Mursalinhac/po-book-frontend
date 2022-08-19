@@ -6,7 +6,7 @@ import {
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/App.css';
-import './css/runwebrun.css';
+// import './css/runwebrun.css';
 
 // 
 
