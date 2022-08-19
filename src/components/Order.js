@@ -9,13 +9,22 @@ function Order() {
     let {model} = useParams();
     const [priceList, setPriceList] = useState({})
     const [isLoading, setIsLoading] = useState(true)
-    const [order, setOrder] = useState({})
+    const [order, setOrder] = useState()
     useEffect(() => {
         const getData = async () => {
             const {data} = await Axios.get(`http://localhost:3001/pricelist/${model}`)
             console.log(data)
             setPriceList(data)
             setIsLoading(false)
+            let options = {}
+            data.data.forEach((option) => {
+                if (option.selectType === "multi") {
+                    options[option.key] = [];
+                } else {
+                    options[option.key] = null;
+                }
+            })
+            setOrder(options)
         }
 
         if (isLoading) {

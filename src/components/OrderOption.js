@@ -1,10 +1,6 @@
 import {Form} from "react-bootstrap";
 
 const OrderOption = ({orderOption, onChange}) => {
-    const handleChange = (e) => {
-        console.log(e.target.value)
-    }
-
     return (
         <>
             <div className="po-book-form" key={orderOption.key}>
@@ -18,25 +14,26 @@ const OrderOption = ({orderOption, onChange}) => {
                                 id={option.code}
                                 label={option.title}
                                 value={option.code}
-                                onChange={() => {
+                                required={false}
+                                onChange={(event) => {
                                     if (orderOption.selectType === "multi") {
-                                        onChange(previousState => {
-                                            console.log(previousState, orderOption.key, previousState[orderOption.key], option)
-                                            // return {
-                                            //     ...previousState,
-                                            //     [orderOption.key]: [option, ...previousState[orderOption.key]]
-                                            // }
-                                            return previousState
-                                        })
+                                        if (event.target.checked) {
+                                            onChange(previousState => {
+                                                return {
+                                                    ...previousState,
+                                                    [orderOption.key]: [...previousState[orderOption.key], option]
+                                                }
+                                            })
+                                        } else {
 
+                                        }
                                     } else {
 
                                         onChange(previousState => {
-                                            console.log(previousState, orderOption.key, option)
+                                            // console.log(previousState, orderOption.key, option)
                                             return {...previousState, [orderOption.key]: option}
                                         })
                                     }
-                                    console.log({parentKey: orderOption.key, ...option})
                                 }}
                             />
                         )
