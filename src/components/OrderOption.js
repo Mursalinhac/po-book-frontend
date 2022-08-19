@@ -21,17 +21,32 @@ const OrderOption = ({orderOption, onChange}) => {
                                             onChange(previousState => {
                                                 return {
                                                     ...previousState,
-                                                    [orderOption.key]: [...previousState[orderOption.key], option]
+                                                    options: {
+                                                        ...previousState.options,
+                                                        [orderOption.key]: {[option.code]: option, ...previousState.options[orderOption.key]},
+                                                    },
+                                                    total: previousState.total + option.price
                                                 }
                                             })
                                         } else {
-
+                                            onChange(previousState => {
+                                                let checkedOptions = previousState.options[orderOption.key]
+                                                delete checkedOptions[option.code]
+                                                return {
+                                                    ...previousState,
+                                                    options: checkedOptions,
+                                                    total: previousState.total - option.price
+                                                }
+                                            })
                                         }
                                     } else {
-
                                         onChange(previousState => {
-                                            // console.log(previousState, orderOption.key, option)
-                                            return {...previousState, [orderOption.key]: option}
+                                            console.log(previousState, orderOption.key, option)
+                                            return {
+                                                ...previousState,
+                                                options: {...previousState.options, [orderOption.key]: option},
+                                                total: previousState.total + option.price - (previousState.options[orderOption.key]?.price || 0)
+                                            }
                                         })
                                     }
                                 }}

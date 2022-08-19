@@ -9,7 +9,7 @@ function Order() {
     let {model} = useParams();
     const [priceList, setPriceList] = useState({})
     const [isLoading, setIsLoading] = useState(true)
-    const [order, setOrder] = useState()
+    const [order, setOrder] = useState({total: 0})
     useEffect(() => {
         const getData = async () => {
             const {data} = await Axios.get(`http://localhost:3001/pricelist/${model}`)
@@ -19,12 +19,14 @@ function Order() {
             let options = {}
             data.data.forEach((option) => {
                 if (option.selectType === "multi") {
-                    options[option.key] = [];
+                    options[option.key] = {};
                 } else {
                     options[option.key] = null;
                 }
             })
-            setOrder(options)
+            setOrder(prevState => {
+                return {options, ...prevState}
+            })
         }
 
         if (isLoading) {
@@ -35,60 +37,60 @@ function Order() {
         <Container fluid>
             <Row>
                 <Col md={7}>
+                    <div>
+                        <div className="po-book-form">
+                            <h4 className="justify-content-center">Customer Info</h4>
+                            <Form>
+                                <Row className="mb-3">
 
-                    <div className="po-book-form">
-                        <h4 className="justify-content-center">Customer Info</h4>
-                        <Form>
-                            <Row className="mb-3">
+                                    <Form.Group as={Col} controlId="formGridName">
+                                        <Form.Label>First Name</Form.Label>
+                                        <Form.Control placeholder="First Name"/>
+                                    </Form.Group>
 
-                                <Form.Group as={Col} controlId="formGridName">
-                                    <Form.Label>First Name</Form.Label>
-                                    <Form.Control placeholder="First Name"/>
+                                    <Form.Group as={Col} controlId="formGridName">
+                                        <Form.Label>Last Name</Form.Label>
+                                        <Form.Control placeholder="Last Name"/>
+                                    </Form.Group>
+
+                                    <Form.Group as={Col} controlId="formGridEmail">
+                                        <Form.Label>Email</Form.Label>
+                                        <Form.Control type="email" placeholder="Enter email"/>
+                                    </Form.Group>
+                                </Row>
+
+                                <Form.Group className="mb-3" controlId="formGridAddress1">
+                                    <Form.Label>Address</Form.Label>
+                                    <Form.Control placeholder="1234 Main St"/>
                                 </Form.Group>
 
-                                <Form.Group as={Col} controlId="formGridName">
-                                    <Form.Label>Last Name</Form.Label>
-                                    <Form.Control placeholder="Last Name"/>
+                                <Form.Group className="mb-3" controlId="formGridAddress2">
+                                    <Form.Label>Address 2</Form.Label>
+                                    <Form.Control placeholder="Apartment, studio, or floor"/>
                                 </Form.Group>
 
-                                <Form.Group as={Col} controlId="formGridEmail">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email"/>
-                                </Form.Group>
-                            </Row>
+                                <Row className="mb-3">
+                                    <Form.Group as={Col} controlId="formGridCity">
+                                        <Form.Label>City</Form.Label>
+                                        <Form.Control/>
+                                    </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formGridAddress1">
-                                <Form.Label>Address</Form.Label>
-                                <Form.Control placeholder="1234 Main St"/>
-                            </Form.Group>
+                                    <Form.Group as={Col} controlId="formGridState">
+                                        <Form.Label>State</Form.Label>
+                                        <Form.Control/>
+                                    </Form.Group>
 
-                            <Form.Group className="mb-3" controlId="formGridAddress2">
-                                <Form.Label>Address 2</Form.Label>
-                                <Form.Control placeholder="Apartment, studio, or floor"/>
-                            </Form.Group>
-
-                            <Row className="mb-3">
-                                <Form.Group as={Col} controlId="formGridCity">
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Control/>
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridState">
-                                    <Form.Label>State</Form.Label>
-                                    <Form.Control/>
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridZip">
-                                    <Form.Label>Zip</Form.Label>
-                                    <Form.Control/>
-                                </Form.Group>
-                            </Row>
-                        </Form>
+                                    <Form.Group as={Col} controlId="formGridZip">
+                                        <Form.Label>Zip</Form.Label>
+                                        <Form.Control/>
+                                    </Form.Group>
+                                </Row>
+                            </Form>
+                        </div>
+                        <br></br>
+                        {priceList.data.map(orderOption => <OrderOption orderOption={orderOption}
+                                                                        onChange={setOrder}/>)}
                     </div>
-                    <br></br>
-
-                    {priceList.data.map(orderOption => <OrderOption orderOption={orderOption} onChange={setOrder}/>)}
-
                 </Col>
                 <Col md={5}>
                     <pre>{JSON.stringify(order, null, 2)}</pre>
