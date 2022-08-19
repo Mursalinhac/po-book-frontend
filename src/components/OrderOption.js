@@ -34,7 +34,7 @@ const OrderOption = ({orderOption, onChange}) => {
                                                 delete checkedOptions[option.code]
                                                 return {
                                                     ...previousState,
-                                                    options: checkedOptions,
+                                                    options: {...previousState.options, [orderOption.key]: checkedOptions},
                                                     total: previousState.total - option.price
                                                 }
                                             })
