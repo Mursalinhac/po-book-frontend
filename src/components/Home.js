@@ -29,7 +29,7 @@ function Home() {
                     <Card >
                         <a className="card card-demo text-dark">
                             <span className="card-img shadow-lg rounded-bottom-4 rounded-top-3 overflow-hidden">
-                            <Link to="/orders/new/z06"><Card.Img variant="top" src={Z06} /></Link>
+                                <Link to="/orders/new/z06"><Card.Img variant="top" src={Z06} /></Link>
                             </span>
                             <Card.Body>
                                 <Card.Title className="white-text">Z06</Card.Title>
@@ -41,7 +41,7 @@ function Home() {
                     <Card >
                         <a className="card card-demo text-dark">
                             <span className="card-img shadow-lg rounded-bottom-4 rounded-top-3 overflow-hidden">
-                            <Link to="/orders/new/eray"><Card.Img variant="top" src={ERAY} /></Link>
+                                <Link to="/orders/new/eray"><Card.Img variant="top" src={ERAY} /></Link>
                             </span>
                             <Card.Body>
                                 <Card.Title className="white-text">ERAY</Card.Title>
@@ -53,7 +53,7 @@ function Home() {
                     <Card >
                         <a className="card card-demo text-dark">
                             <span className="card-img shadow-lg rounded-bottom-4 rounded-top-3 overflow-hidden">
-                            <Link to="/orders/new/zr1"><Card.Img variant="top" src={ZR1} /></Link>
+                                <Link to="/orders/new/zr1"><Card.Img variant="top" src={ZR1} /></Link>
                             </span>
                             <Card.Body>
                                 <Card.Title className="white-text">ZR1</Card.Title>

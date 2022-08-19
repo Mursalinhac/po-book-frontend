@@ -1,5 +1,5 @@
-function Preview(){
-    return(
-        <OrderPreview order={order}/>
+function Preview() {
+    return (
+        <OrderPreview order={order} />
     );
 }

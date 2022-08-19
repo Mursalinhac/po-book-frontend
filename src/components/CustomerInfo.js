@@ -1,4 +1,4 @@
-import  {Form, Row, Col} from "react-bootstrap";
+import { Form, Row, Col } from "react-bootstrap";
 
 function CustomerInfo() {
     return (
