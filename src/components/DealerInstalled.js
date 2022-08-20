@@ -1,11 +1,10 @@
-import { Row } from "react-bootstrap";
 import OrderOption from "./OrderOption";
 
 function DealerInstalled({ options, onChange }) {
     return (
-        <Row>
+        <div className="tile-holder">
             {options.map(orderOption => <OrderOption orderOption={orderOption} onChange={onChange} />)}
-        </Row>
+        </div>
     );
 }
 export default DealerInstalled;
