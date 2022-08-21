@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
-import { Col, Container, Row, Form, Tab, Tabs } from "react-bootstrap";
+import { Container, Tab, Tabs } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Axios from "axios";
 
-import OrderOption from "./OrderOption";
-import OrderPreview from "./OrderPreview";
 import CustomerInfo from "./CustomerInfo"
 import FactoryInstalled from "./FactoryInstalled"
 import DealerInstalled from "./DealerInstalled"
-// import Preview from "./Preview"
+import Preview from "./Preview"
 
 
 
@@ -73,7 +71,7 @@ function Order() {
                     <DealerInstalled options={priceList.dealerInstalled} onChange={setOrder} />
                 </Tab>
                 <Tab eventKey="preview" title="Preview" >
-                    {/* <Preview /> */}
+                     <Preview order={order}/>
                 </Tab>
             </Tabs>
         </Container>);

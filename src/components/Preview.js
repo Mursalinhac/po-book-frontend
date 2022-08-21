@@ -1,5 +1,7 @@
-function Preview() {
+function Preview({order}) {
     return (
-        <OrderPreview order={order} />
+        <pre>{JSON.stringify(order, null, 2)}</pre>
     );
 }
+
+export default Preview;
