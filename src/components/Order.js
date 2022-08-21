@@ -22,28 +22,7 @@ function Order() {
             console.log(data)
             setPriceList(data)
             setIsLoading(false)
-            let options = { factoryInstalled: {}, dealerInstalled: {} }
-            data.factoryInstalled.forEach((option) => {
-                if (option.selectType === "multi") {
-                    options.factoryInstalled[option.key] = [];
-                } else {
-                    options.factoryInstalled[option.key] = null;
-                }
-            })
-
-            data.dealerInstalled.forEach((option) => {
-                if (option.selectType === "multi") {
-                    options.dealerInstalled[option.key] = [];
-                } else {
-                    options.dealerInstalled[option.key] = null;
-                }
-            })
-            setOrder(previousState => {
-                return {
-                    ...previousState,
-                    options
-                }
-            })
+            setOrder(data)
         }
 
         if (isLoading) {
@@ -61,7 +40,7 @@ function Order() {
                 fill
             >
                 <Tab eventKey="customerInfo" title="Customer Info">
-                    <CustomerInfo />
+                    <CustomerInfo onChange={setOrder}/>
                 </Tab>
                 <Tab eventKey="factoryInstaller" title="Factory Installed" >
                     <FactoryInstalled options={priceList.factoryInstalled} onChange={setOrder} />
