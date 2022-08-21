@@ -72,6 +72,12 @@
     background-color: black;
     border-color: rgba(177, 177, 180, 0.7);
 }
+.po-book-form .form-control.bg-dark{
+    background-color: black !important;
+}
+.po-book-form input:not(:placeholder-shown){
+    border: black;
+}
 
 .po-book-form .form-check-input:checked[type=radio], .po-book-form .form-check-input:checked[type=checkbox] {
     background-color: black;
@@ -105,3 +111,9 @@
     }
 }
 
+.form-control:focus{
+    color: white;
+}
+.bg-dark{
+    background-color: transparent;
+}
