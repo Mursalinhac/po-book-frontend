@@ -1,6 +1,7 @@
 import {Form} from "react-bootstrap";
 
 const OrderOption = ({orderOption, onChange, parentKey}) => {
+    console.log(orderOption)
     return (
         <div className="tile">
             <h4>{orderOption.title}</h4>
@@ -20,27 +21,27 @@ const OrderOption = ({orderOption, onChange, parentKey}) => {
                                         onChange(previousState => {
                                             return {
                                                 ...previousState,
-                                                options: {
-                                                    ...previousState.options,
-                                                    [parentKey]: {
-                                                        ...previousState.options[parentKey],
-                                                        [orderOption.key]: {[option.code]: option, ...previousState.options[parentKey][orderOption.key]}
-                                                    },
+                                                [parentKey]: {
+                                                    ...previousState[parentKey],
+                                                    [orderOption.key]: {
+                                                        ...previousState[parentKey][orderOption.key],
+                                                        selected: {[option.code]: option, ...previousState[parentKey][orderOption.key].selected}
+                                                    }
                                                 },
                                                 total: previousState.total + option.price
                                             }
                                         })
                                     } else {
                                         onChange(previousState => {
-                                            let checkedOptions = previousState.options[parentKey][orderOption.key]
+                                            let checkedOptions = previousState[parentKey][orderOption.key].selected
                                             delete checkedOptions[option.code]
                                             return {
                                                 ...previousState,
-                                                options: {
-                                                    ...previousState.options,
-                                                    [parentKey]: {
-                                                        ...previousState.options[parentKey],
-                                                        [orderOption.key]: checkedOptions
+                                                [parentKey]: {
+                                                    ...previousState[parentKey],
+                                                    [orderOption.key]: {
+                                                        ...previousState[parentKey][orderOption.key],
+                                                        selected: checkedOptions
                                                     }
                                                 },
                                                 total: previousState.total - option.price
@@ -49,18 +50,18 @@ const OrderOption = ({orderOption, onChange, parentKey}) => {
                                     }
                                 } else {
                                     onChange(previousState => {
-                                        console.log(previousState, orderOption.key, option)
-                                        console.log(parentKey, previousState.options[parentKey])
+                                        console.log(previousState, orderOption, option)
+                                        console.log(parentKey, previousState[parentKey])
                                         return {
                                             ...previousState,
-                                            options: {
-                                                ...previousState.options,
-                                                [parentKey]: {
-                                                    ...previousState.options[parentKey],
-                                                    [orderOption.key]: option
+                                            [parentKey]: {
+                                                ...previousState[parentKey],
+                                                [orderOption.key]: {
+                                                    ...previousState[parentKey][orderOption.key],
+                                                    selected: option
                                                 }
                                             },
-                                            total: previousState.total + option.price - (previousState.options[parentKey][orderOption.key]?.price || 0)
+                                            total: previousState.total + option.price - (previousState[parentKey][orderOption.key]?.price || 0)
                                         }
                                     })
                                 }

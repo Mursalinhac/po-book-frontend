@@ -1,6 +1,20 @@
 function Preview({order}) {
     return (
-        <pre>{JSON.stringify(order, null, 2)}</pre>
+        <div className="po-book-form">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Code</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <pre>{JSON.stringify(order, null, 2)}</pre>
+
+        </div>
     );
 }
 
