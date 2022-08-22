@@ -1,4 +1,6 @@
-function Preview({order}) {
+import { Button } from "react-bootstrap";
+
+function Preview({ order }) {
     return (
         <div className="po-book-form">
             <table>
@@ -13,9 +15,15 @@ function Preview({order}) {
                 </tbody>
             </table>
             <pre>{JSON.stringify(order, null, 2)}</pre>
-
+            <Button className="po-book-button" variant="outline-dark">Print</Button>{' '}
+            <Button className="po-book-button" variant="outline-dark">Save</Button>{' '}
         </div>
+
+
+
+
     );
+    
 }
 
 export default Preview;
