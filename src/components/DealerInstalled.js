@@ -4,8 +4,8 @@ function DealerInstalled({options, onChange}) {
     return (
         <div className="tile-holder">
             {Object.entries(options).map(([optionName, orderOption]) => <OrderOption orderOption={orderOption}
-                                                                                   onChange={onChange}
-                                                                                   parentKey="dealerInstalled"/>)}
+                                                                                     onChange={onChange}
+                                                                                     parentKey="dealerInstalled"/>)}
         </div>
     );
 }
