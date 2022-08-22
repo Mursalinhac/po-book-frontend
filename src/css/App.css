@@ -63,7 +63,7 @@
     font-size: 14px;
 }
 
-.po-book-form h4 {
+.po-book-form h1, h2, h3, h4, h5, h6 {
     color: white;
     text-align: center;
 }
@@ -116,4 +116,21 @@
 }
 .bg-dark{
     background-color: transparent;
+}
+.preview-label {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.preview-field {
+    font-size: 15px;
+}
+
+.po-book-table {
+    color: white;
+    border-color: black;
+}
+
+.po-book-table .price-cell {
+    text-align: right;
 }

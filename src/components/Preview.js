@@ -1,20 +1,31 @@
+import CustomerInfoPreview from "./CustomerInfoPreview";
+import {Container, Table} from "react-bootstrap";
+import InstallationPreview from "./InstallationPreview";
+
 function Preview({order}) {
     return (
-        <div className="po-book-form">
-            <table>
-                <thead>
+        <Container>
+            <div className="po-book-form">
+                <CustomerInfoPreview customerInfo={order.customerInfo}/>
+                <hr/>
+                <Table className="po-book-table" size="sm">
+                    <thead>
                     <tr>
+                        <th></th>
                         <th>Code</th>
                         <th>Name</th>
-                        <th>Price</th>
+                        <th className="price-cell">Price</th>
                     </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <pre>{JSON.stringify(order, null, 2)}</pre>
+                    </thead>
+                    <tbody>
+                    <InstallationPreview options={order.factoryInstalled} title="Factory Installed"/>
+                    <InstallationPreview options={order.dealerInstalled} title="Dealer Installed"/>
+                    </tbody>
+                </Table>
 
-        </div>
+                <pre>{JSON.stringify(order, null, 2)}</pre>
+            </div>
+        </Container>
     );
 }
 
