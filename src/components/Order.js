@@ -18,7 +18,7 @@ function Order() {
     const [order, setOrder] = useState({ total: 0 })
     useEffect(() => {
         const getData = async () => {
-            const { data } = await Axios.get(`/pricelist/${model}`)
+            const { data } = await Axios.get(`/pricelist/${model}.json`)
             console.log(data)
             setPriceList(data)
             setIsLoading(false)
