@@ -1,7 +1,6 @@
 import {Form} from "react-bootstrap";
 
 const OrderOption = ({orderOption, onChange, parentKey}) => {
-    console.log(orderOption)
     return (
         <div className="tile">
             <h4>{orderOption.title}</h4>
@@ -28,7 +27,10 @@ const OrderOption = ({orderOption, onChange, parentKey}) => {
                                                         selected: {[option.code]: option, ...previousState[parentKey][orderOption.key].selected}
                                                     }
                                                 },
-                                                total: previousState.total + option.price
+                                                price: {
+                                                    ...previousState.price,
+                                                    subTotal: previousState.price.subTotal + option.price
+                                                }
                                             }
                                         })
                                     } else {
@@ -44,14 +46,15 @@ const OrderOption = ({orderOption, onChange, parentKey}) => {
                                                         selected: checkedOptions
                                                     }
                                                 },
-                                                total: previousState.total - option.price
+                                                price: {
+                                                    ...previousState.price,
+                                                    subTotal: previousState.price.subTotal - option.price
+                                                }
                                             }
                                         })
                                     }
                                 } else {
                                     onChange(previousState => {
-                                        console.log(previousState, orderOption, option)
-                                        console.log(parentKey, previousState[parentKey])
                                         return {
                                             ...previousState,
                                             [parentKey]: {
@@ -61,7 +64,10 @@ const OrderOption = ({orderOption, onChange, parentKey}) => {
                                                     selected: option
                                                 }
                                             },
-                                            total: previousState.total + option.price - (previousState[parentKey][orderOption.key]?.price || 0)
+                                            price: {
+                                                ...previousState.price,
+                                                subTotal: previousState.price.subTotal + option.price - (previousState[parentKey][orderOption.key]?.price || 0)
+                                            }
                                         }
                                     })
                                 }
