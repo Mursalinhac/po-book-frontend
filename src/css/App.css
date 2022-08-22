@@ -57,7 +57,7 @@
 }
 
 .po-book-form {
-    border: 1px solid rgba(177, 177, 180, 0.7);
+    border: 2px solid rgba(177, 177, 180, 0.7);
     border-radius: 10px;
     padding: 10px;
     font-size: 14px;
@@ -68,20 +68,28 @@
     text-align: center;
 }
 
+
+
 .po-book-form .form-check-input {
     background-color: black;
     border-color: rgba(177, 177, 180, 0.7);
 }
-.po-book-form .form-control.bg-dark{
+
+.po-book-form .form-control.bg-dark {
     background-color: black !important;
-}
-.po-book-form input:not(:placeholder-shown){
-    border: black;
+    border: 1px solid rgba(177, 177, 180, 0.7);
 }
 
-.po-book-form .form-check-input:checked[type=radio], .po-book-form .form-check-input:checked[type=checkbox] {
+input:not(:placeholder-shown):not([type=checkbox]):not([type=radio]) {
+    border: 2px transparent !important;
+}
+
+
+.po-book-form .form-check-input:checked[type=radio],
+.po-book-form .form-check-input:checked[type=checkbox] {
     background-color: black;
     border-color: black;
+
 }
 
 @media (min-width: 2000px) {
@@ -111,26 +119,9 @@
     }
 }
 
-.form-control:focus{
+.form-control:focus {
     color: white;
 }
 .bg-dark{
     background-color: transparent;
-}
-.preview-label {
-    font-weight: bold;
-    font-size: 15px;
-}
-
-.preview-field {
-    font-size: 15px;
-}
-
-.po-book-table {
-    color: white;
-    border-color: black;
-}
-
-.po-book-table .price-cell {
-    text-align: right;
 }
