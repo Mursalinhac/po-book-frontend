@@ -1,7 +1,7 @@
 import {
-  BrowserRouter as Router,
-  Route,
-  Routes
+    BrowserRouter as Router,
+    Route,
+    Routes
 } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,21 +19,21 @@ import Orders from "./components/Orders";
 import Order from "./components/Order";
 
 
-
 function App() {
-  return (
-    <Router>
-      <Navigation />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/customers" element={<Customers />} />
-        <Route exact path="/orders" element={<Orders />} />
-        <Route exact path="/orders/new/:model" element={<Order />} />
-      </Routes>
+    return (
+        <Router>
+            <Navigation/>
+            <Routes>
+                <Route exact path="/" element={<Home/>}/>
+                <Route exact path="/customers" element={<Customers/>}/>
+                <Route exact path="/orders" element={<Orders/>}/>
+                <Route exact path="/orders/new/:model" element={<Order/>}/>
+                <Route exact path="*" element={<Home/>}/>
+            </Routes>
 
-      <Footer />
-    </Router>
-  );
+            <Footer/>
+        </Router>
+    );
 }
 
 export default App;

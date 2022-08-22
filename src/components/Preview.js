@@ -8,7 +8,7 @@ function Preview({order, setOrder}) {
         <Container>
             <div className="po-book-form">
                 <CustomerInfoPreview customerInfo={order.customerInfo}/>
-                <hr/>
+                <div className="horizontal-rule"></div>
                 <Table className="po-book-table" size="sm">
                     <thead>
                     <tr>
@@ -18,14 +18,14 @@ function Preview({order, setOrder}) {
                         <th className="price-cell">Price</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    {/*<tbody>*/}
                     <InstallationPreview options={order.factoryInstalled} title="Factory Installed"/>
                     <InstallationPreview options={order.dealerInstalled} title="Dealer Installed"/>
                     <PricePreview price={order.price} setOrder={setOrder}/>
-                    </tbody>
+                    {/*</tbody>*/}
                 </Table>
 
-                <pre>{JSON.stringify(order.price, null, 2)}</pre>
+                {/*<pre>{JSON.stringify(order.price, null, 2)}</pre>*/}
             </div>
         </Container>
     );

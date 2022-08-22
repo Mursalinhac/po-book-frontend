@@ -9,7 +9,7 @@ const CustomerInfoPreview = ({customerInfo}) => {
                     <Row>
                         <Col className="preview-label">Name</Col>
                         <Col className="preview-field">
-                            {`${customerInfo?.firstName} ${customerInfo?.lastName}`}
+                            {`${customerInfo?.firstName || ""} ${customerInfo?.lastName || ""}`}
                         </Col>
                     </Row>
                 </Col>
@@ -26,7 +26,7 @@ const CustomerInfoPreview = ({customerInfo}) => {
                     <Row>
                         <Col className="preview-label">Address</Col>
                         <Col className="preview-field">
-                            {`${customerInfo?.address1} ${customerInfo?.address2 || ""}`}
+                            {`${customerInfo?.address1 || ""} ${customerInfo?.address2 || ""}`}
                         </Col>
                     </Row>
                 </Col>
