@@ -1,6 +1,7 @@
 import CustomerInfoPreview from "./CustomerInfoPreview";
 import {Container, Table} from "react-bootstrap";
 import InstallationPreview from "./InstallationPreview";
+import PricePreview from "./PricePreview";
 
 function Preview({order}) {
     return (
@@ -20,6 +21,7 @@ function Preview({order}) {
                     <tbody>
                     <InstallationPreview options={order.factoryInstalled} title="Factory Installed"/>
                     <InstallationPreview options={order.dealerInstalled} title="Dealer Installed"/>
+                    <PricePreview price={order.price} />
                     </tbody>
                 </Table>
 

@@ -3,7 +3,7 @@ import OptionPreview from "./OptionPreview";
 const InstallationPreview = ({options, title}) => {
     return (
         <>
-        <tr><h2>{title}</h2></tr>
+        <tr><h3>{title}</h3></tr>
             {Object.entries(options).map(([, option]) => (<OptionPreview option={option}/>))}
         </>
     )
