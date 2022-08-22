@@ -1,0 +1,881 @@
+{
+    "_id": "ahfaoihgoashnoibn",
+    "model": "z06",
+    "title": "Z06",
+    "imageUrl": "ahoihadiog",
+    "customerInfo": {},
+    "factoryInstalled": {
+        "model": {
+            "title": "Select Model",
+            "key": "model",
+            "selectType": "single",
+            "options": [
+                {
+                    "code": "1YH07",
+                    "title": "Corvette Z06 Coupe 1LZ",
+                    "price": 105000
+                },
+                {
+                    "code": "1YH67",
+                    "title": "Corvette Z06 Coupe 2LZ",
+                    "price": 114200
+                },
+                {
+                    "code": "1YH07",
+                    "title": "Corvette Z06 Coupe 3LZ",
+                    "price": 118850
+                },
+                {
+                    "code": "1YH07",
+                    "title": "Corvette Z06 Convertible 1LZ",
+                    "price": 112500
+                },
+                {
+                    "code": "1YH67",
+                    "title": "Corvette Z06 Convertible 2LZ",
+                    "price": 121200
+                },
+                {
+                    "code": "1YH67",
+                    "title": "Corvette Z06 Convertible 3LZ",
+                    "price": 125850
+                }
+            ],
+            "selected": {}
+        },
+        "exteriorColor": {
+            "title": "Extrerior Color",
+            "key": "exteriorColor",
+            "selectType": "single",
+            "options": [
+                {
+                    "code": "G1W",
+                    "title": "White Pearl Metallic Tintcoat",
+                    "price": 0,
+                    "additional information": "70th Anniversary Edition Only"
+                },
+                {
+                    "code": "G48",
+                    "title": "Caffeine Metallic",
+                    "price": 0
+                },
+                {
+                    "code": "G8G",
+                    "title": "Arctic White",
+                    "price": 0
+                },
+                {
+                    "code": "G9F",
+                    "title": "Ceramic Matrix",
+                    "price": 0
+                },
+                {
+                    "code": "GA7",
+                    "title": "Hypersonic Gray Metallic",
+                    "price": 0
+                },
+                {
+                    "code": "GAR",
+                    "title": "Carbon Flash Metallic",
+                    "price": 0,
+                    "additional information": "70th Anniversary Edition Only"
+                },
+                {
+                    "code": "GBA",
+                    "title": "Black",
+                    "price": 0
+                },
+                {
+                    "code": "GC5",
+                    "title": "Amplify Orange Tintcoat",
+                    "price": 995
+                },
+                {
+                    "code": "GDO",
+                    "title": "Accelerate Yellow Metallic",
+                    "price": 500
+                },
+                {
+                    "code": "GKZ",
+                    "title": "Torch Red  ",
+                    "price": 0
+                },
+                {
+                    "code": "GMO",
+                    "title": "Rapid Blue",
+                    "price": 500
+                },
+                {
+                    "code": "GPH",
+                    "title": "Red Mist Metallic Tintcoat",
+                    "price": 995
+                },
+                {
+                    "code": "GS7",
+                    "title": "Elkhart Lake Blue",
+                    "price": 0
+                },
+                {
+                    "code": "GS7",
+                    "title": "Silver Flare Metallic",
+                    "price": 0
+                }
+            ],
+            "selected": {}
+        },
+        "interiorColor": {
+            "title": "Interior Color",
+            "key": "interiorColor",
+            "selectType": "single",
+            "options": [
+                {
+                    "title": "Jet Black ",
+                    "price": 0
+                },
+                {
+                    "title": "Adrenaline Red ",
+                    "price": 0
+                },
+                {
+                    "title": "Sky Cool Gray",
+                    "price": 0
+                },
+                {
+                    "title": "Natural",
+                    "price": 0,
+                    "additional information": "Requires 2LZ or 3LZ"
+                },
+                {
+                    "title": "Twilight Blue Dipped",
+                    "price": 0,
+                    "additional information": "Requires 3LZ"
+                },
+                {
+                    "title": "Adrenaline Red Dipped",
+                    "price": 0,
+                    "additional information": "Requires 3LZ"
+                },
+                {
+                    "title": "Natural Dipped",
+                    "price": 0,
+                    "additional information": "Requires 3LZ"
+                },
+                {
+                    "title": "Ceramic with Red Stitch",
+                    "price": 0,
+                    "additional information": "70th Anniversary Edition Only"
+                },
+                {
+                    "code": "R6X",
+                    "title": "Custom Interior",
+                    "price": 695,
+                    "additional information": "Requires Sold Order"
+                },
+                {
+                    "code": "D30",
+                    "title": "Color Combination Override",
+                    "price": 695,
+                    "additional information": "Requires Sold Order"
+                }
+            ],
+            "selected": {}
+        },
+        "additionOptions": {
+            "title": "Additional Options",
+            "key": "additionOptions",
+            "selectType": "multi",
+            "options": [
+                {
+                    "code": "BV4",
+                    "title": "Personalized Plaque w\/Name and VIN",
+                    "price": 295
+                },
+                {
+                    "code": "E60",
+                    "title": "Front Lift Adjustable Height with Memory",
+                    "price": 2595,
+                    "additional information": "2LZ or 3LZ"
+                },
+                {
+                    "code": "PIN",
+                    "title": "Customer Selectable VIN",
+                    "price": 5000
+                },
+                {
+                    "code": "R6X",
+                    "title": "Custom Interior Trim and Seat Combination Override",
+                    "price": 590,
+                    "additional information": "3LZ Only"
+                },
+                {
+                    "code": "R8C",
+                    "title": "Corvette Museum Delivery",
+                    "price": 995
+                },
+                {
+                    "code": "TVS",
+                    "title": "Low-profile rear spoiler and front splitter",
+                    "price": 595
+                },
+                {
+                    "code": "ERI",
+                    "title": "Battery Protection Package",
+                    "price": 100
+                }
+            ],
+            "selected": {}
+        },
+        "brakesColor": {
+            "title": "Brakes",
+            "key": "brakesColor",
+            "selectType": "multi",
+            "options": [
+                {
+                    "code": "J57",
+                    "title": "Carbon Ceramic Brakes",
+                    "price": 8495,
+                    "additional information": "Included in Z07 Package"
+                },
+                {
+                    "code": "J6E",
+                    "title": "Yellow Painted Brake Calipers",
+                    "price": 695
+                },
+                {
+                    "code": "J6F",
+                    "title": "Bright Red Painted Brake Calipers",
+                    "price": 695
+                },
+                {
+                    "code": "J6L",
+                    "title": "Orange Painted Brake Calipers",
+                    "price": 695
+                },
+                {
+                    "code": "J6N",
+                    "title": "Edge Red Painted Brake Calipers",
+                    "price": 695
+                }
+            ],
+            "selected": {}
+        },
+        "HTC": {
+            "title": "Convertible Top",
+            "key": "HTC",
+            "selectType": "multi",
+            "options": [
+                {
+                    "code": "D84",
+                    "title": "Carbon Flash Painted Nacelles and Roof",
+                    "price": 1295,
+                    "additional information": "Convertible Only"
+                },
+                {
+                    "code": "D86",
+                    "title": "Carbon Flash Painted Nacelles and Body-Color Roof",
+                    "price": 1295,
+                    "additional information": "Convertible Only"
+                }
+            ],
+            "selected": {}
+        },
+        "exhaust": {
+            "title": "Exhaust Systems",
+            "key": "exhaust",
+            "selectType": "single",
+            "options": [
+                {
+                    "code": "NGA",
+                    "title": "Black Exhaust Tips",
+                    "price": 395,
+                    "additional information": "Requires NPP on Stingray"
+                }
+            ],
+            "selected": {}
+        },
+        "stickerpackage": {
+            "title": "Exterior Appearance",
+            "key": "stickerpackage",
+            "selectType": "multi",
+            "options": [
+                {
+                    "code": "EFA",
+                    "title": "Shadow Gray Exterior Accents",
+                    "price": 995
+                },
+                {
+                    "code": "EFY",
+                    "title": "Body Color Exterior Accents",
+                    "price": 995
+                },
+                {
+                    "code": "EYK",
+                    "title": "Chrome Exterior Badge Package",
+                    "price": 295
+                },
+                {
+                    "code": "CFV",
+                    "title": "Visible Carbon Fiber Ground Effects",
+                    "price": 3995
+                },
+                {
+                    "code": "CFZ",
+                    "title": "Painted Carbon Fiber Ground Effects",
+                    "price": 2995
+                },
+                {
+                    "code": "T0F",
+                    "title": "Carbon Aero Package - Painted",
+                    "price": 8495,
+                    "additional information": "Inluces CFZ Ground Effects"
+                },
+                {
+                    "code": "T0G",
+                    "title": "Carbon Aero Package - Visible",
+                    "price": 10495,
+                    "additional information": "Inluces CFV Ground Effects"
+                },
+                {
+                    "code": "ZYC",
+                    "title": "Carbon Flash Metallic Painted Outside Mirrors",
+                    "price": 195
+                },
+                {
+                    "code": "ZZ3",
+                    "title": "Engine Appearance Package",
+                    "price": 995,
+                    "additional information": "Coupe Only"
+                }
+            ],
+            "selected": {}
+        },
+        "interiorTrim": {
+            "title": "Interior Trim",
+            "key": "interiorTrim",
+            "selectType": "multi",
+            "options": [
+                {
+                    "code": "36S",
+                    "title": "Yellow Custom Leather Stitch",
+                    "price": 495,
+                    "additional information": "3LZ only. Requires Jet Black Interior"
+                },
+                {
+                    "code": 379,
+                    "title": "Orange Seat Belts",
+                    "price": 495
+                },
+                {
+                    "code": "38S",
+                    "title": "Adrenaline Red Custom Leather Stitch",
+                    "price": 495,
+                    "additional information": "3LZ only"
+                },
+                {
+                    "code": 719,
+                    "title": "Black Seat Belts",
+                    "price": 0
+                },
+                {
+                    "code": "3A9",
+                    "title": "Tension Blue Seat Belts",
+                    "price": 495,
+                    "additional information": "Std with HTO Interior"
+                },
+                {
+                    "code": "3F9",
+                    "title": "Torch Red Seat Belts",
+                    "price": 495,
+                    "additional information": "Std with HNK and HV1 Interiors"
+                },
+                {
+                    "code": "3M9",
+                    "title": "Yellow Seat Belts",
+                    "price": 495
+                },
+                {
+                    "code": "3N9",
+                    "title": "Tan Seat Belts",
+                    "price": 495,
+                    "additional information": "Std with HZN and HUF"
+                },
+                {
+                    "code": "BAZ",
+                    "title": "Stealth Interior Trim Package; Dark finish aluminum trim",
+                    "price": 595,
+                    "additional information": "2LZ or 3LZ"
+                },
+                {
+                    "code": "FA5",
+                    "title": "Carbon Fiber Cluster-Surround and Console, Door Switch Plates",
+                    "price": 1500,
+                    "additional information": "2LZ or 3LZ"
+                },
+                {
+                    "code": "FA6",
+                    "title": "Carbon Fiber Insturment Panel Trim, Cluster Surround and Console\/Door Inserts",
+                    "price": 4995,
+                    "additional information": "3LZ Only"
+                },
+                {
+                    "code": "N26",
+                    "title": "Sueded Microfiber-Wrapped Steering Wheel",
+                    "price": 595,
+                    "additional information": "N\/A on 3LZ; Std on 3LT with HV1 Interior"
+                },
+                {
+                    "code": "N2Z",
+                    "title": "Carbon Fiber and Sueded Wrapped Steering Wheel",
+                    "price": 695
+                },
+                {
+                    "code": "TU7",
+                    "title": "Two-Tone Seats",
+                    "price": 595,
+                    "additional information": "2LZ or 3LZ"
+                },
+                {
+                    "code": "IOT",
+                    "title": "Chevrolet Infotainment 3 Premium System with Navigation and Performance Data Recorder",
+                    "price": 1795,
+                    "additional information": "Std on 2LZ and 3LZ"
+                }
+            ],
+            "selected": {}
+        },
+        "performancePackages": {
+            "title": "Performance Package",
+            "key": "performancePackages",
+            "selectType": "single",
+            "options": [
+                {
+                    "code": "Z07",
+                    "title": "Z07 Performance Package",
+                    "price": 8995
+                }
+            ],
+            "selected": {}
+        },
+        "roof": {
+            "title": "Roof Panels",
+            "key": "roof",
+            "selectType": "single",
+            "options": [
+                {
+                    "code": "C2Z",
+                    "title": "Visible Carbon Fiber Removable Roof Panel with Body Color Surround",
+                    "price": 2495,
+                    "additional information": "Coupe Only"
+                },
+                {
+                    "code": "CC3",
+                    "title": "Transparent Removable Roof Panel",
+                    "price": 995,
+                    "additional information": "Coupe Only"
+                }
+            ],
+            "selected": {}
+        },
+        "seats": {
+            "title": "Seats",
+            "key": "seats",
+            "selectType": "single",
+            "options": [
+                {
+                    "code": "AE4",
+                    "title": "Competition Sport Bucket Seats",
+                    "price": 500,
+                    "additional information": "3LT Only"
+                },
+                {
+                    "code": "AE4",
+                    "title": "Competition Sport Bucket Seats",
+                    "price": 995,
+                    "additional information": "1LT Only"
+                },
+                {
+                    "code": "AE4",
+                    "title": "Competition Sport Bucket Seats",
+                    "price": 1995,
+                    "additional information": "2LT Only"
+                },
+                {
+                    "code": "AH2",
+                    "title": "GT2 Bucket Seats",
+                    "price": 1695,
+                    "additional information": "2LT Only; Std on 3LT"
+                }
+            ],
+            "selected": {}
+        },
+        "special": {
+            "title": "Special Edition",
+            "key": "special",
+            "selectType": "single",
+            "options": [
+                {
+                    "code": "Y70",
+                    "title": "70th Anniversary Special Edition",
+                    "price": 5995,
+                    "additionalInformation": "3LT only"
+                }
+            ],
+            "selected": {}
+        },
+        "stripePackages": {
+            "title": "Stripe Packages",
+            "key": "stripePackages",
+            "selectType": "single",
+            "options": [
+                {
+                    "code": "DSY",
+                    "title": "Orange Full Length Dual Racing Stripe Package",
+                    "price": 995
+                },
+                {
+                    "code": "DSZ",
+                    "title": "Red Full Length Dual Racing Stripe Package",
+                    "price": 995
+                },
+                {
+                    "code": "DT0",
+                    "title": "Yellow Full Length Dual Racing Stripe Package",
+                    "price": 995
+                },
+                {
+                    "code": "DTF",
+                    "title": "70th Anniversary Satin Matrix Gray Full Length Dual Racing Stripe Package",
+                    "price": 995,
+                    "additional information": "Requires Y70"
+                },
+                {
+                    "code": "DTH",
+                    "title": "Carbon Flash Metallic Full Length Dual Racing Stripe Package",
+                    "price": 995
+                },
+                {
+                    "code": "DTK",
+                    "title": "70th Anniversary Satin Black Metallic Full Length Dual Racing Stripe Package",
+                    "price": 995,
+                    "additional information": "Requires Y70"
+                },
+                {
+                    "code": "DUB",
+                    "title": "Sterling Silver Full Length Dual Racing Stripe Package",
+                    "price": 995
+                },
+                {
+                    "code": "DUW",
+                    "title": "Blue Full Length Dual Racing Stripe Package",
+                    "price": 995
+                },
+                {
+                    "code": "DX0",
+                    "title": "Midnight Gray Full Length Dual Racing Stripe Package",
+                    "price": 995
+                },
+                {
+                    "code": "DZU",
+                    "title": "Carbon Flash Edge Yellow Stinger Stripe",
+                    "price": 500
+                },
+                {
+                    "code": "DZV",
+                    "title": "Carbon Flash Midnight Silver Stinger Stripe",
+                    "price": 500
+                },
+                {
+                    "code": "DZX",
+                    "title": "Carbon Flash Edge Red Stinger Stripe",
+                    "price": 500
+                }
+            ],
+            "selected": {}
+        },
+        "wheels": {
+            "title": "Wheels",
+            "key": "wheels",
+            "selectType": "single",
+            "options": [
+                {
+                    "code": "ROY",
+                    "title": "Painted Carbon Fiber Wheel",
+                    "price": 9995
+                },
+                {
+                    "code": "ROZ",
+                    "title": "Visible Carbon Fiber Wheel",
+                    "price": 11995
+                },
+                {
+                    "code": "SOE",
+                    "title": "Spider Design - Silver Forged Aluminum Wheels",
+                    "price": 0
+                },
+                {
+                    "code": "SOA",
+                    "title": "Spider Design -Black Forged Aluminum Wheels",
+                    "price": 495
+                },
+                {
+                    "code": "SOC",
+                    "title": "Spideer Design - Satin Graphite Forged Aluminum Wheels",
+                    "price": 495
+                },
+                {
+                    "code": "SOD",
+                    "title": "Spider Design - Machined-faced Forged Aluminum Wheels",
+                    "price": 1495
+                }
+            ],
+            "selected": {}
+        }
+    },
+    "dealerInstalled": {
+        "accessories": {
+            "title": "Dealer Installed",
+            "key": "accessories",
+            "selectType": "multi",
+            "options": [
+                {
+                    "code": "5DH",
+                    "title": "Spider Design, Satin Graphite Forged Aluminum Wheels with Red Stripe",
+                    "price": 3595
+                },
+                {
+                    "code": "5DK",
+                    "title": "Spider Design, Tech Bronze Forged Aluminum Wheels",
+                    "price": 3795
+                },
+                {
+                    "code": "5JR",
+                    "title": "Outside Mirror Covers in Visible Carbon Fiber",
+                    "price": 1285,
+                    "additional information": "Includes Carbon Flash Metallic-Painted Outside Mirrors"
+                },
+                {
+                    "code": "5ZC",
+                    "title": "Jake Logo Wheel Center Caps",
+                    "price": 260
+                },
+                {
+                    "code": "5ZD",
+                    "title": "Carbon Flash Center Caps w\/Crossed Flags",
+                    "price": 260
+                },
+                {
+                    "code": "CAV",
+                    "title": "Contoured Cargo Area Liners with Jake Logo",
+                    "price": 165
+                },
+                {
+                    "code": "PDA",
+                    "title": "Jake C8.R Graphics Package",
+                    "price": 995
+                },
+                {
+                    "code": "PDY",
+                    "title": "Roadside Safety Package",
+                    "price": 175,
+                    "additional information": "Includes First Aid Kit and Highway Safety Kit"
+                },
+                {
+                    "code": "PEF",
+                    "title": "Contoured Liner Protection Package",
+                    "price": 335
+                },
+                {
+                    "code": "RIA",
+                    "title": "All-weather floor liners with Jake logo",
+                    "price": 205
+                },
+                {
+                    "code": "RIK",
+                    "title": "Rear Corvette Script, Painted in Torch Red",
+                    "price": 395
+                },
+                {
+                    "code": "RIN",
+                    "title": "Rear Corvette Script, Painted in Arctic White",
+                    "price": 395
+                },
+                {
+                    "code": "RWH",
+                    "title": "Premium Indoor Car Cover in Black with Crossed Flags Logo",
+                    "price": 460
+                },
+                {
+                    "code": "RWU",
+                    "title": "Collapsible Cargo Area Organizer",
+                    "price": 165
+                },
+                {
+                    "code": "RYT",
+                    "title": "First Aid Kit",
+                    "price": 55
+                },
+                {
+                    "code": "S08",
+                    "title": "Highway Safety Kit",
+                    "price": 130
+                },
+                {
+                    "code": "S2L",
+                    "title": "Set of Premium Leather Weekend Travel Bags",
+                    "price": 1495
+                },
+                {
+                    "code": "S47",
+                    "title": "Chrome Lug Nuts",
+                    "price": 245
+                },
+                {
+                    "code": "SBT",
+                    "title": "Dual Roof Panel Package",
+                    "price": 2295
+                },
+                {
+                    "code": "SC7",
+                    "title": "Roof Panel Storage Pouch",
+                    "price": 175
+                },
+                {
+                    "code": "SDA",
+                    "title": "Recovery Hook, Black",
+                    "price": 105
+                },
+                {
+                    "code": "SFE",
+                    "title": "Chrome Wheel Locks",
+                    "price": 95
+                },
+                {
+                    "code": "SFZ",
+                    "title": "Dark Stealth Crossed Flags Emblem, Frong and Back",
+                    "price": 225
+                },
+                {
+                    "code": "SG1",
+                    "title": "Z06 Badge in Edge Red",
+                    "price": 295
+                },
+                {
+                    "code": "SL8",
+                    "title": "Rear Corvette Script, Painted in Elkhart Lake Blue",
+                    "price": 295
+                },
+                {
+                    "code": "SNE",
+                    "title": "Jake Hood Graphic",
+                    "price": 495
+                },
+                {
+                    "code": "SPY",
+                    "title": "Black Lug Nuts",
+                    "price": 245
+                },
+                {
+                    "code": "SPZ",
+                    "title": "Black Wheel Locks",
+                    "price": 125
+                },
+                {
+                    "code": "SQU",
+                    "title": "Ultra-High Security Chrome Wheel Locks",
+                    "price": 105
+                },
+                {
+                    "code": "VPW",
+                    "title": "jake C8.R Rear Hash Graphic",
+                    "price": 495
+                },
+                {
+                    "code": "VTB",
+                    "title": "Rear Fascia\/Roof Storage Protector in Black with Crossed Flag Logo",
+                    "price": 135
+                },
+                {
+                    "code": "VW9",
+                    "title": "Tech Bronze Venter Caps with Crossed Flags",
+                    "price": 260
+                },
+                {
+                    "code": "VYW",
+                    "title": "Premium Carpeted Floor Mats",
+                    "price": 260
+                },
+                {
+                    "code": "W2D",
+                    "title": "Cargo Net Set",
+                    "price": 105
+                },
+                {
+                    "code": "WKQ",
+                    "title": "Premium Indoor Car Cover in Black with Crossed Flags Logo and Access Panels",
+                    "price": 475
+                },
+                {
+                    "code": "WKR",
+                    "title": "Premium Indoor Car Cover, Yellow, Fully Rendered C8.R",
+                    "price": 1195
+                },
+                {
+                    "code": "WKS",
+                    "title": "Z06 Premium Indoor Car Cover",
+                    "price": 460
+                },
+                {
+                    "code": "WL0",
+                    "title": "Premium Indoor Car Cover, Gray, Fully Rendered C8.R",
+                    "price": 1195
+                }
+            ],
+            "selected": {}
+        },
+        "paintProtection": {
+            "title": "XPEL",
+            "key": "paintProtection",
+            "selectType": "single",
+            "options": [
+                {
+                    "title": "Cermaic Coating",
+                    "price": 1695
+                },
+                {
+                    "title": "Front Clip",
+                    "price": 2795
+                },
+                {
+                    "title": "Front Clip with Ceramic Coating",
+                    "price": 4190
+                },
+                {
+                    "title": "Track Pack",
+                    "price": 3495
+                },
+                {
+                    "title": "Track Pack with Ceramic Coating",
+                    "price": 4890
+                },
+                {
+                    "title": "Full Car PPF",
+                    "price": 6495
+                },
+                {
+                    "title": "Full Car PPF with Ceramic Coating",
+                    "price": 7890
+                }
+            ],
+            "selected": {}
+        }
+    },
+    "price": {
+        "subTotal": 0,
+        "taxPercentage": 6.625,
+        "tax": 0,
+        "documentationFees": 0,
+        "misc": 0,
+        "gasGuzzler": 0,
+        "total": 0
+    }
+}
