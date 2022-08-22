@@ -1,27 +1,24 @@
-import { Button } from "react-bootstrap";
-
-function Preview({ order }) {
+function Preview({order}) {
     return (
-        <div className="po-book-form">
-            <table>
-                <thead>
+        <Container>
+            <div className="po-book-form">
+                <CustomerInfoPreview customerInfo={order.customerInfo}/>
+                <hr/>
+                <Table className="po-book-table" size="sm">
+                    <thead>
                     <tr>
+                        <th></th>
                         <th>Code</th>
                         <th>Name</th>
-                        <th>Price</th>
+                        <th className="price-cell">Price</th>
                     </tr>
                 </thead>
                 <tbody>
                 </tbody>
             </table>
             <pre>{JSON.stringify(order, null, 2)}</pre>
-            <Button className="po-book-button" variant="outline-dark">Print</Button>{' '}
-            <Button className="po-book-button" variant="outline-dark">Save</Button>{' '}
+
         </div>
-
-
-
-
     );
     
 }
