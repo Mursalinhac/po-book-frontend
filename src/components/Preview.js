@@ -3,7 +3,7 @@ import {Container, Table} from "react-bootstrap";
 import InstallationPreview from "./InstallationPreview";
 import PricePreview from "./PricePreview";
 
-function Preview({order}) {
+function Preview({order, setOrder}) {
     return (
         <Container>
             <div className="po-book-form">
@@ -21,11 +21,11 @@ function Preview({order}) {
                     <tbody>
                     <InstallationPreview options={order.factoryInstalled} title="Factory Installed"/>
                     <InstallationPreview options={order.dealerInstalled} title="Dealer Installed"/>
-                    <PricePreview price={order.price} />
+                    <PricePreview price={order.price} setOrder={setOrder}/>
                     </tbody>
                 </Table>
 
-                <pre>{JSON.stringify(order, null, 2)}</pre>
+                <pre>{JSON.stringify(order.price, null, 2)}</pre>
             </div>
         </Container>
     );

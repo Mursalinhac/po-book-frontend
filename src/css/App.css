@@ -143,3 +143,8 @@ input:not(:placeholder-shown):not([type=checkbox]):not([type=radio]) {
 .po-book-table .price-cell {
     text-align: right;
 }
+
+.po-book-table .price-cell input {
+    background-color: black !important;
+    color: white !important;
+}

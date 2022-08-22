@@ -50,7 +50,7 @@ function Order() {
                     <DealerInstalled options={priceList.dealerInstalled} onChange={setOrder} />
                 </Tab>
                 <Tab eventKey="preview" title="Preview" >
-                     <Preview order={order}/>
+                     <Preview order={order} setOrder={setOrder}/>
                 </Tab>
             </Tabs>
         </Container>);
