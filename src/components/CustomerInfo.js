@@ -12,6 +12,7 @@ function CustomerInfo({onChange}) {
             }
         })
     }
+
     return (
         <div className="po-book-form">
             <Form>

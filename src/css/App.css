@@ -149,6 +149,11 @@ input:not(:placeholder-shown):not([type=checkbox]):not([type=radio]) {
     color: white !important;
 }
 
+.po-book-button {
+    background-color: black;
+    border-color: rgba(177, 177, 180, 0.7);
+}
+
 .horizontal-rule {
     margin-top: 5px;
     border-bottom: 1px solid white;

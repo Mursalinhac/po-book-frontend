@@ -13,7 +13,6 @@ import './css/imagehover.css';
 
 import Navigation from './components/Navigation';
 import Home from './components/Home';
-import Footer from './components/Footer';
 import Customers from "./components/Customers";
 import Orders from "./components/Orders";
 import Order from "./components/Order";
@@ -29,9 +28,10 @@ function App() {
                 <Route exact path="/orders" element={<Orders/>}/>
                 <Route exact path="/orders/new/:model" element={<Order/>}/>
                 <Route exact path="*" element={<Home/>}/>
+
             </Routes>
 
-            <Footer/>
+            {/*<Footer/>*/}
         </Router>
     );
 }

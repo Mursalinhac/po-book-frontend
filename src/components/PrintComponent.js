@@ -1,12 +1,13 @@
-import {Form, Table, Badge, Button, FloatingLabel} from "react-bootstrap";
+import React, {useRef} from "react";
+import {Badge, Button, Table} from "react-bootstrap";
+import ReactToPrint from "react-to-print";
 
-function Customers() {
-    return (<div className="po-book-form">
-            <Form>
-                <FloatingLabel controlId="floatingInput" label="Search">
-                    <Form.Control className="bg-dark white-text w-50 " placeholder="First Name"></Form.Control>
-                </FloatingLabel>
-                <Table className=" po-book-table">
+class ComponentToPrint extends React.Component {
+    render() {
+        return (
+            <div>
+                <h2 style={{color: "green"}}>Final Order {this.props.order.model}</h2>
+                <Table style={{color: "black"}}>
                     <thead>
                     <tr>
                         <th>Date</th>
@@ -83,7 +84,27 @@ function Customers() {
                     </tr>
                     </tbody>
                 </Table>
-            </Form></div>);
+            </div>
+        );
+    }
 }
 
-export default Customers;
+export default function PrintComponent({order}) {
+    let componentRef = useRef();
+
+    return (
+        <>
+            <div>
+                {/* button to trigger printing of target component */}
+                <ReactToPrint
+                    trigger={() => <Button>Print this out!</Button>}
+                    content={() => componentRef}
+                />
+
+                <div style={{display: "none"}}>
+                    <ComponentToPrint ref={(el) => (componentRef = el)} order={order}/>
+                </div>
+            </div>
+        </>
+    );
+}
