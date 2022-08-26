@@ -1,7 +1,5 @@
-import { Container, Navbar, Nav, NavDropdown, Card, Button, Row, Col } from "react-bootstrap";
+import { Container, Card, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
-
 import stingray from "../images/stingray.jpeg"
 import Z06 from "../images/Z06.jpg"
 import ERAY from "../images/eray.jpeg"

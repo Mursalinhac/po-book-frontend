@@ -152,7 +152,7 @@ body {
 }
 
 .nav-item {
-    width: 25%;
+    width: auto;
 }
 
 .nav-pills .nav-link {
@@ -192,6 +192,12 @@ body {
     width: 100px;
     margin: 0 auto;
     float: right;
+}
+
+
+.print-text{
+    color: black !important;
+    border: transparent;
 }
 
 

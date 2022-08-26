@@ -1,12 +1,10 @@
 import {Col, Form, Row} from "react-bootstrap";
 
-function Orders() {
+function TradeIn() {
     return (
         <div className="po-book-form">
             <Form>
-                <h1>Trade-in</h1>
                 <Row className="mb-3">
-
                     <Form.Group as={Col} controlId="formGridNumber">
                         <Form.Label>Year</Form.Label>
                         <Form.Control className="bg-dark white-text" type="number" placeholder="Year"
@@ -64,6 +62,7 @@ function Orders() {
                         />
                     </Form.Group>
                 </Row>
+
                 <Row className="mb-3">
                     <Form.Group as={Col} controlId="formGridName">
                         <Form.Label>Balance Owed to</Form.Label>
@@ -100,4 +99,4 @@ function Orders() {
     );
 }
 
-export default Orders;
+export default TradeIn;

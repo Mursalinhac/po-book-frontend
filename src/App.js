@@ -6,15 +6,14 @@ import {
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/App.css';
-// import './css/runwebrun.css';
 import './css/imagehover.css';
 
 // 
 
 import Navigation from './components/Navigation';
 import Home from './components/Home';
-import Customers from "./components/Customers";
-import Orders from "./components/Orders";
+import Customers from "./components/CustomerLists";
+import Orders from "./components/TradeIn";
 import Order from "./components/Order";
 
 
