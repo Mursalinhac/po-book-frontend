@@ -1,13 +1,4 @@
 /* card size */
-.card-img-overlay {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 3.33333rem;
-    border-radius: 14px;
-}
 
 .card-img,
 .card-img-top,
@@ -46,25 +37,14 @@
     border-radius: 14px;
 }
 
-
-
-
-
 /* image hover */
-
-
 
 .card-demo .card-img {
     display: block;
-    border: 1px solid rgba(177, 177, 180, 0.1);
     -webkit-transition: -webkit-transform 150ms linear;
     transition: transform 150ms linear, -webkit-transform 150ms linear;
     will-change: transform;
 }
-
-
-
-
 
 .card-demo .card-title {
     position: relative;
@@ -117,20 +97,9 @@ a.card-demo {
     box-sizing: border-box;
 }
 
-
-
-/* Card image size */
 .card {
     padding-bottom: 25px;
 }
-
-.card-img,
-.card-img-top {
-    border-top-left-radius: 14px;
-    border-top-right-radius: 14px;
-}
-
-
 
 
 /* tab and tabs */

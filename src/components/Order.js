@@ -28,7 +28,7 @@ function Order() {
             getData();
         }
     })
-    return isLoading ? <h1>Loading ...</h1> : (
+    return isLoading ? <h1> COMING SOON...</h1> : (
         <Container fluid>
             <Tabs
 
