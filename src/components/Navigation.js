@@ -17,7 +17,7 @@ function Navigation() {
             {/* <Button variant="outline-secondary" as={Link} to="/order/new">Create PO</Button> */}
           </Nav>
           <Nav>
-            <NavDropdown title={`Paul Zwick`} id="collapsible-nav-dropdown">
+            <NavDropdown title={`Login Name`} id="collapsible-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
