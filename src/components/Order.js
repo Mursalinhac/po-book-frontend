@@ -17,11 +17,7 @@ function Order() {
     const [order, setOrder] = useState({total: 0})
     useEffect(() => {
         const getData = async () => {
-<<<<<<< HEAD
             const { data } = await Axios.get(`https://raw.githubusercontent.com/Mursalinhac/po-book-frontend/gh-pages/${model}.json`)
-=======
-            const {data} = await Axios.get(`/pricelist/${model}`)
->>>>>>> f6d5dbd35fdc1f959422588e6503c29e910fcff6
             console.log(data)
             setPriceList(data)
             setIsLoading(false)

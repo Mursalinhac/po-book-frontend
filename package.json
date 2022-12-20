@@ -1,9 +1,6 @@
 {
   "name": "po-book-frontend",
-<<<<<<< HEAD
   "homepage": "https://mursalinhac.github.io/po-book-frontend/",
-=======
->>>>>>> f6d5dbd35fdc1f959422588e6503c29e910fcff6
   "version": "0.1.0",
   "private": true,
   "dependencies": {
