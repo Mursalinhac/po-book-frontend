@@ -2,6 +2,7 @@ import CustomerInfoPreview from "./CustomerInfoPreview";
 import {Container, Table} from "react-bootstrap";
 import InstallationPreview from "./InstallationPreview";
 import PricePreview from "./PricePreview";
+import PrintComponent from "./PrintComponent";
 
 function Preview({order, setOrder}) {
     return (
@@ -27,7 +28,9 @@ function Preview({order, setOrder}) {
 
                 {/*<pre>{JSON.stringify(order.price, null, 2)}</pre>*/}
             </div>
+            <PrintComponent order={order}/>
         </Container>
+
     );
 }
 

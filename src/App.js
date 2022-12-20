@@ -6,16 +6,16 @@ import {
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/App.css';
-// import './css/runwebrun.css';
 import './css/imagehover.css';
+import './css/styles.css'
+
 
 // 
 
 import Navigation from './components/Navigation';
 import Home from './components/Home';
-import Footer from './components/Footer';
-import Customers from "./components/Customers";
-import Orders from "./components/Orders";
+import Customers from "./components/CustomerLists";
+import Orders from "./components/TradeIn";
 import Order from "./components/Order";
 
 
@@ -29,9 +29,10 @@ function App() {
                 <Route exact path="/orders" element={<Orders/>}/>
                 <Route exact path="/orders/new/:model" element={<Order/>}/>
                 <Route exact path="*" element={<Home/>}/>
+
             </Routes>
 
-            <Footer/>
+            {/*<Footer/>*/}
         </Router>
     );
 }

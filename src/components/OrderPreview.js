@@ -39,7 +39,7 @@ function OrderPreview({ order }) {
                                 <Form.Label>{value.price}</Form.Label>
                             </Col>
                         </Row>)
-                        : <p>optionName</p>
+                        : <p>{optionName}</p>
                 })}
             <pre>{JSON.stringify(order, null, 2)}</pre>
             </Form>
