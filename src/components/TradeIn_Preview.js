@@ -1,6 +1,6 @@
 import {Col, Form, Row} from "react-bootstrap";
 
-function TradeIn() {
+const TradeIn_Preview = ({ tradeInfo }) => {
     return (
         <div className="po-book-form">
             <Form>
@@ -9,6 +9,7 @@ function TradeIn() {
                         <Form.Label>Year</Form.Label>
                         <Form.Control className="bg-dark white-text" type="number" placeholder="Year"
                         />
+                        <Col>{tradeInfo?.year}</Col>
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridName">
@@ -99,4 +100,4 @@ function TradeIn() {
     );
 }
 
-export default TradeIn;
+export default TradeIn_Preview;

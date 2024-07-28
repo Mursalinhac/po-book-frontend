@@ -159,3 +159,9 @@ input:not(:placeholder-shown):not([type=checkbox]):not([type=radio]) {
     border-bottom: 1px solid white;
     margin-bottom: 5px;
 }
+
+.box{
+    width: 8px;
+    height: 8px;
+    border: 1px solid black;
+}

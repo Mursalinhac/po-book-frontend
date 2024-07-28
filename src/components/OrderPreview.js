@@ -1,11 +1,13 @@
-import { Form, Row, Col } from "react-bootstrap";
-function OrderPreview({ order }) {
+import React from "react";
+import {Form, Row, Col} from "react-bootstrap";
+
+function OrderPreview({order}) {
     return (
         <div className="po-book-form">
             <h4 className="justify-content-center">Order Info</h4>
             <Form>
-                {order.model ? (
-                    <Row>
+                {order.model && (
+                    <Row >
                         <Col>
                             <Form.Label>{order.model.title}</Form.Label>
                         </Col>
@@ -13,10 +15,9 @@ function OrderPreview({ order }) {
                             <Form.Label>{order.model.price}</Form.Label>
                         </Col>
                     </Row>
+                )}
 
-                ) : null}
-
-                {order.exteriorColor ? (
+                {order.exteriorColor && (
                     <Row>
                         <Col>
                             <Form.Label>{order.exteriorColor.title}</Form.Label>
@@ -25,25 +26,26 @@ function OrderPreview({ order }) {
                             <Form.Label>{order.exteriorColor.price}</Form.Label>
                         </Col>
                     </Row>
+                )}
 
-                ) : null}
-
-                {Object.entries(order).forEach(([optionName, value]) => { 
-                    console.log(optionName, value)
-                    return value?.title ?
-                        (<Row>
+                {Object.entries(order).map(([optionName, value]) => (
+                    value?.title ? (
+                        <Row key={optionName}>
                             <Col>
                                 <Form.Label>{value.title}</Form.Label>
                             </Col>
                             <Col className="justify-content-end">
                                 <Form.Label>{value.price}</Form.Label>
                             </Col>
-                        </Row>)
-                        : <p>{optionName}</p>
-                })}
-            <pre>{JSON.stringify(order, null, 2)}</pre>
+                        </Row>
+                    ) : (
+                        <p key={optionName}>{optionName}</p>
+                    )
+                ))}
+                <pre>{JSON.stringify(order, null, 2)}</pre>
             </Form>
         </div>
     );
 }
+
 export default OrderPreview;

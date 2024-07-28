@@ -3,6 +3,7 @@ import {Container, Table} from "react-bootstrap";
 import InstallationPreview from "./InstallationPreview";
 import PricePreview from "./PricePreview";
 import PrintComponent from "./PrintComponent";
+import PrintPreview from "./PrintPreview";
 
 function Preview({order, setOrder}) {
     return (
@@ -25,10 +26,17 @@ function Preview({order, setOrder}) {
                     <PricePreview price={order.price} setOrder={setOrder}/>
                     {/*</tbody>*/}
                 </Table>
-
+                
                 {/*<pre>{JSON.stringify(order.price, null, 2)}</pre>*/}
             </div>
             <PrintComponent order={order}/>
+
+            <div style={{
+                height: "842px",
+                width: "595px",
+                backgroundColor:"white"}}>
+                <PrintPreview order={order}/>
+            </div>
         </Container>
 
     );

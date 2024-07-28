@@ -7,7 +7,7 @@ import CustomerInfo from "./CustomerInfo"
 import FactoryInstalled from "./FactoryInstalled"
 import DealerInstalled from "./DealerInstalled"
 import Preview from "./Preview"
-import TradeIn from "./TradeIn";
+import TradeInfo from "./TradeInfo";
 
 
 function Order() {
@@ -42,7 +42,7 @@ function Order() {
                     <CustomerInfo onChange={setOrder}/>
                 </Tab>
                 <Tab eventKey="trade-in" title="Trade-In">
-                    <TradeIn order={order} setOrder={setOrder}/>
+                    <TradeInfo order={order} setOrder={setOrder}/>
                 </Tab>
                 <Tab eventKey="factoryInstaller" title="Factory Installed">
                     <FactoryInstalled options={priceList.factoryInstalled} onChange={setOrder}/>

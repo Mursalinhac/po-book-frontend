@@ -15,7 +15,7 @@ import './css/styles.css'
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import Customers from "./components/CustomerLists";
-import Orders from "./components/TradeIn";
+import Orders from "./components/TradeInfo";
 import Order from "./components/Order";
 
 

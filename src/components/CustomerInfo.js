@@ -126,8 +126,6 @@ function CustomerInfo({onChange}) {
                 </Row>
             </Form>
         </div>
-
-
     );
 }
 
