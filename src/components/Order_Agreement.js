@@ -44,10 +44,46 @@ function Order_Agreement() {
                     deposit shall consist of the amount listed as Deposit and/or Net Trade-In Allowance, if
                     any. Neither Party shall have any further obligation to the other and dealer may sell
                     the vehicle at any price to any other Purchaser and Dealer shall also retain the entire
-                    amount of that sale. Signed X__________________________
+                    amount of that sale. <br/>Signed <strong style={{color: 'red'}}>X</strong>
+                    <mark style={{backgroundColor: 'yellow'}}>__________________________</mark>
                 </text>
             </Row>
-        </Container>);
+            <Row style={{
+                color: 'blue',
+                border: '1px solid blue',
+                padding: '5px',
+                position: 'relative',
+                bottom: '0',
+                width: '100%'
+            }}>
+                <text>
+                    Customer agrees that this Order on the face as well as any attachments to it includes all the terms
+                    and
+                    conditions of a sale. Customer further agrees this Order cancels and supersedes any prior agreements
+                    and
+                    as of the date signed by Dealer or authorized agent, comprises the complete and exclusive statement
+                    of
+                    the terms of the agreement between Customer and Dealer. THIS ORDER SHALL NOT BECOME BINDING UNTIL
+                    ACCEPTED BY DEALER OR HIS AUTHORIZED REPRESENTATIVE. Customer by execution of this order
+                    acknowledges
+                    that they have read the terms and conditions and have received a true copy of the order. I am 18
+                    years
+                    of age or older and of full legal capacity to enter into this contract.
+
+                    Accepted By: <strong style={{color: 'red'}}>X</strong>
+                    <mark style={{backgroundColor: 'yellow'}}> ________________________________________</mark>
+                    <strong style={{color: 'red'}}>X</strong>
+                    <mark style={{backgroundColor: 'yellow'}}>________________________________________</mark>
+                    Dealer or Authorized Agent Date Customer Date
+                    (Dan Maida or Dave Salvatore are the only Authorized Representatives)
+                    <strong style={{color: 'red'}}>X</strong>
+                    <mark style={{backgroundColor: 'yellow'}}>________________________________________</mark>
+                    Customer Date
+
+                </text>
+            </Row>
+        </Container>
+    );
 }
 
 export default Order_Agreement;

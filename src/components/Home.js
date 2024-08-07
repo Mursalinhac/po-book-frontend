@@ -2,8 +2,8 @@ import {Container, Card, Row, Col} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import stingray from "../images/stingray.jpeg"
 import Z06 from "../images/Z06.jpg"
-import ERAY from "../images/eray.jpeg"
-import ZR1 from "../images/zr1.jpg"
+import ERAY from "../images/eray.jpg"
+import ZR1 from "../images/ZR1.webp"
 
 
 function Home() {
@@ -37,13 +37,13 @@ function Home() {
                 </Col>
                 <Col md={6} xs={12}>
                     <Card>
-                        <a className="card card-demo text-dark ">
+                        <a className="card card-demo text-dark">
                             <span className="card-img shadow-lg rounded-bottom-4 rounded-top-3 overflow-hidden">
                                 <Link to="/orders/new/eray">
-                                        <figure className="effect-duke">
-                                            <Card.Img variant="top" src={ERAY}/>
-                                            <figcaption><p>Coming Soon </p></figcaption>
-                                        </figure>
+                                        {/*<figure className="effect-duke">*/}
+                                    <Card.Img variant="top" src={ERAY}/>
+                                    {/*<figcaption><p>Coming Soon </p></figcaption>*/}
+                                    {/*</figure>*/}
                                 </Link>
                             </span>
                             <Card.Body>
