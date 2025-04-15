@@ -1,3 +1,4 @@
+import React from "react";
 import {Col, Row, Form, Card} from "react-bootstrap";
 import Picture1 from "../images/PO book images/Picture1.png";
 import Picture2 from "../images/PO book images/Picture2.png";
@@ -6,104 +7,100 @@ import Picture4 from "../images/PO book images/Picture4.png";
 import Picture5 from "../images/PO book images/Picture5.png";
 import Picture6 from "../images/PO book images/Picture6.png";
 import Top from "../images/PO book images/top.png";
+import cioccaLogo from "../images/PO book images/top.png";
 
 function CustomerInfoPrint({customerInfo}) {
     return (
-        <>
-            <div style={{display: "flex", flexDirection: "column"}}>
-                <img
-                    style={{
-                        height: '40px', width: "200px",
-                        alignSelf: "center"
-                    }}
-                    src={Top}
-                    className="img-fluid"/>
-                <div style={{display: "flex", flexDirection: "row"}}>
-                    <div style={{display: "flex", flexDirection: "column"}}>
-                        <p style={{
-                            color: "red",
-                            fontWeight: "bold",
-                            fontSize: "xx-small"
-                        }}>Retail Vehicle Order
-                        </p>
-                        <div className="box"></div>
+        <div className="customer-info-section">
+            {/* Vehicle Type Checkboxes */}
+            <div className="vehicle-type">
+                <div className="checkbox-row">
+                    <div className="checkbox-container">
+                        <div className={`checkbox ${customerInfo?.vehicleType === 'New' ? 'checked' : ''}`}></div>
+                        <span>New</span>
                     </div>
-                    <text style={{fontSize: "xx-small"}}>430 N. Albany Ave, Atlantic City, NJ 08401
-                        609-344-2100 / 609-345-2100
-                    </text>
+                    <div className="checkbox-container">
+                        <div className={`checkbox ${customerInfo?.vehicleType === 'Used' ? 'checked' : ''}`}></div>
+                        <span>Used</span>
+                    </div>
+                    <div className="checkbox-container">
+                        <div className={`checkbox ${customerInfo?.vehicleType === 'Demo' ? 'checked' : ''}`}></div>
+                        <span>Demo</span>
+                    </div>
+                    <div className="checkbox-container">
+                        <div className={`checkbox ${customerInfo?.vehicleType === 'Program/Fleet Rental' ? 'checked' : ''}`}></div>
+                        <span>Program/Fleet Rental</span>
+                    </div>
                 </div>
-                <Form>
-                    <Form.Group as={Row}>
-                        <Form.Label as={Col}>Name:</Form.Label>
-                        <Col style={{color: 'blue', textDecoration: 'underline'}}>{customerInfo?.firstName}</Col>
-
-                        <Form.Label as={Col}>Stock</Form.Label>
-                        <Col style={{color: 'blue', textDecoration: 'underline'}}>{customerInfo?.stock}</Col>
-
-                        <Form.Label as={Col}>Salesperson:</Form.Label>
-                        <Col style={{color: 'blue', textDecoration: 'underline'}}>{customerInfo?.salesperson}</Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Form.Label as={Col}>Address</Form.Label>
-                        <Col style={{color: 'blue', textDecoration: 'underline'}}>{customerInfo?.address1}</Col>
-
-                        <Form.Label as={Col}>State</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.state}</Col>
-
-                        <Form.Label as={Col}>City</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.city}</Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Form.Label as={Col}>Zip Code</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.zipcode}</Col>
-
-                        <Form.Label as={Col}>Mobile Phone</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.number}</Col>
-
-                        <Form.Label as={Col}>Email</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.email}</Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Form.Label as={Col}>Year</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.year}</Col>
-
-                        <Form.Label as={Col}>Make</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.make}</Col>
-
-                        <Form.Label as={Col}>Model</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.model}</Col>
-
-                        <Form.Label as={Col}>Body Type</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.bodytype}</Col>
-                    </Form.Group>
-
-                    <Form.Group as={Row}>
-                        <Form.Label as={Col}>Color</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.color}</Col>
-
-                        <Form.Label as={Col}>Trim</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.trim}</Col>
-
-                        <Form.Label as={Col}>Top</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.top}</Col>
-
-                        <Form.Label as={Col}>Miles</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.miles}</Col>
-
-                        <Form.Label as={Col}>VIN</Form.Label>
-                        <Col style={{color: 'blue'}}>{customerInfo?.vin}</Col>
-                    </Form.Group>
-                </Form>
-
             </div>
-        </>
-
-    )
-        ;
-
+            
+            {/* Customer and Vehicle Information Table */}
+            <table className="po-table customer-table">
+                <tbody>
+                    <tr>
+                        <td width="15%">Customer</td>
+                        <td width="35%" className="info-field">{customerInfo?.firstName} {customerInfo?.lastName}</td>
+                        <td width="15%">Stock #</td>
+                        <td width="35%" className="info-field">{customerInfo?.stock}</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td className="info-field">{customerInfo?.address1}</td>
+                        <td>City</td>
+                        <td className="info-field">{customerInfo?.city}</td>
+                    </tr>
+                    <tr>
+                        <td>Home Phone</td>
+                        <td className="info-field">{customerInfo?.homePhone}</td>
+                        <td>State</td>
+                        <td className="info-field">{customerInfo?.state}</td>
+                    </tr>
+                    <tr>
+                        <td>Please Enter My Order For One:</td>
+                        <td className="info-field"></td>
+                        <td>Mobile Phone</td>
+                        <td className="info-field">{customerInfo?.number}</td>
+                    </tr>
+                    <tr>
+                        <td>Color</td>
+                        <td className="info-field">{customerInfo?.color}</td>
+                        <td>Zip</td>
+                        <td className="info-field">{customerInfo?.zipcode}</td>
+                    </tr>
+                    <tr>
+                        <td>Year</td>
+                        <td className="info-field">{customerInfo?.year}</td>
+                        <td>Email</td>
+                        <td className="info-field">{customerInfo?.email}</td>
+                    </tr>
+                    <tr>
+                        <td>Make</td>
+                        <td className="info-field">Chevrolet</td>
+                        <td>Model</td>
+                        <td className="info-field">Corvette Z06</td>
+                    </tr>
+                    <tr>
+                        <td>Trim</td>
+                        <td className="info-field">{customerInfo?.trim || 'Natural Dipped'}</td>
+                        <td>Body Type</td>
+                        <td className="info-field">{customerInfo?.bodytype}</td>
+                    </tr>
+                    <tr>
+                        <td>Top</td>
+                        <td className="info-field">{customerInfo?.top}</td>
+                        <td>VIN</td>
+                        <td className="info-field">{customerInfo?.vin}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td className="info-field"></td>
+                        <td>Miles</td>
+                        <td className="info-field">{customerInfo?.miles}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    );
 }
 
 export default CustomerInfoPrint;

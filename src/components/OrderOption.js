@@ -1,11 +1,27 @@
-import {Form} from "react-bootstrap";
+import {Form, Alert} from "react-bootstrap";
 
 const OrderOption = ({orderOption, onChange, parentKey}) => {
+    // Safety check for undefined or null orderOption
+    if (!orderOption) {
+        console.error('OrderOption received null or undefined orderOption prop');
+        return <Alert variant="warning">Missing option data</Alert>;
+    }
+
+    // Safety check for missing options array
+    if (!orderOption.options || !Array.isArray(orderOption.options)) {
+        console.error('OrderOption received invalid options array', orderOption);
+        return <Alert variant="warning">Invalid option data</Alert>;
+    }
     return (
         <div className="tile">
             <h4>{orderOption.title}</h4>
             <Form className="po-book-form">
-                {orderOption.options.map(option => {
+                {orderOption.options.map((option, index) => {
+                    // Skip options without a code
+                    if (!option || !option.code) {
+                        console.warn('Skipping option without code', option);
+                        return null;
+                    }
                     return (
                         <Form.Check
                             type={orderOption.selectType === "multi" ? "checkbox" : "radio"}
@@ -18,13 +34,19 @@ const OrderOption = ({orderOption, onChange, parentKey}) => {
                                 if (orderOption.selectType === "multi") {
                                     if (event.target.checked) {
                                         onChange(previousState => {
+                                            // Ensure price exists and is a number
+                                            const optionPrice = typeof option.price === 'number' ? option.price : 0;
+                                            const currentSubTotal = previousState.price?.subTotal || 0;
+
                                             let newPrice = {
                                                 ...previousState.price,
-                                                subTotal: previousState.price.subTotal + option.price
+                                                subTotal: currentSubTotal + optionPrice
                                             }
 
-                                            newPrice.tax = Math.round(newPrice.subTotal * newPrice.taxPercentage) / 100
-                                            newPrice.total = newPrice.subTotal + newPrice.tax
+                                            // Safely calculate tax
+                                            const taxPercentage = newPrice.taxPercentage || 0;
+                                            newPrice.tax = Math.round(newPrice.subTotal * taxPercentage) / 100;
+                                            newPrice.total = newPrice.subTotal + newPrice.tax;
                                             return {
                                                 ...previousState,
                                                 [parentKey]: {
@@ -42,13 +64,19 @@ const OrderOption = ({orderOption, onChange, parentKey}) => {
                                             let checkedOptions = previousState[parentKey][orderOption.key].selected
                                             delete checkedOptions[option.code]
 
+                                            // Ensure price exists and is a number
+                                            const optionPrice = typeof option.price === 'number' ? option.price : 0;
+                                            const currentSubTotal = previousState.price?.subTotal || 0;
+
                                             let newPrice = {
                                                 ...previousState.price,
-                                                subTotal: previousState.price.subTotal - option.price
+                                                subTotal: Math.max(0, currentSubTotal - optionPrice) // Prevent negative values
                                             }
 
-                                            newPrice.tax = Math.round(newPrice.subTotal * newPrice.taxPercentage) / 100
-                                            newPrice.total = newPrice.subTotal + newPrice.tax
+                                            // Safely calculate tax
+                                            const taxPercentage = newPrice.taxPercentage || 0;
+                                            newPrice.tax = Math.round(newPrice.subTotal * taxPercentage) / 100;
+                                            newPrice.total = newPrice.subTotal + newPrice.tax;
                                             return {
                                                 ...previousState,
                                                 [parentKey]: {
@@ -64,13 +92,19 @@ const OrderOption = ({orderOption, onChange, parentKey}) => {
                                     }
                                 } else {
                                     onChange(previousState => {
+                                        // Safely handle price calculations
+                                        const optionPrice = typeof option.price === 'number' ? option.price : 0;
+                                        const currentSubTotal = previousState.price?.subTotal || 0;
+                                        const selectedPrice = previousState[parentKey]?.[orderOption.key]?.selected?.price || 0;
+
                                         let newPrice = {
                                             ...previousState.price,
-                                            subTotal: previousState.price.subTotal + option.price -
-                                                (previousState[parentKey][orderOption.key]?.selected.price || 0)
+                                            subTotal: Math.max(0, currentSubTotal + optionPrice - selectedPrice)
                                         }
-                                        newPrice.tax = Math.round(newPrice.subTotal * newPrice.taxPercentage) / 100
-                                        newPrice.total = newPrice.subTotal + newPrice.tax
+                                        // Safely calculate tax
+                                        const taxPercentage = newPrice.taxPercentage || 0;
+                                        newPrice.tax = Math.round(newPrice.subTotal * taxPercentage) / 100;
+                                        newPrice.total = newPrice.subTotal + newPrice.tax;
                                         return {
                                             ...previousState,
                                             [parentKey]: {

@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react";
-import {Container, Tab, Tabs} from "react-bootstrap";
+import {Container, Tab, Tabs, Alert} from "react-bootstrap";
 import {useParams} from "react-router-dom";
 import Axios from "axios";
 
@@ -12,26 +12,57 @@ import TradeInfo from "./TradeInfo";
 
 function Order() {
     let {model} = useParams();
-    const [priceList, setPriceList] = useState({})
-    const [isLoading, setIsLoading] = useState(true)
-    const [order, setOrder] = useState({total: 0})
+    const [priceList, setPriceList] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [order, setOrder] = useState({total: 0});
+
+    // Fetch data only once when component mounts or model changes
     useEffect(() => {
         const getData = async () => {
-            const {data} = await Axios.get(`/pricelist/${model}`)
-            console.log(data)
-            setPriceList(data)
-            setIsLoading(false)
-            setOrder(data)
-        }
+            try {
+                console.log(`Fetching data for model: ${model}`);
+                // Use absolute URL to avoid proxy issues
+                const response = await Axios.get(`http://localhost:3001/pricelist/${model}`);
+                console.log("Data received:", response.data);
 
-        if (isLoading) {
-            getData();
-        }
-    })
-    return isLoading ? <h1> COMING SOON...</h1> : (
+                // Initialize with empty objects if undefined
+                const safeData = {
+                    ...response.data,
+                    factoryInstalled: response.data.factoryInstalled || {},
+                    dealerInstalled: response.data.dealerInstalled || {}
+                };
+
+                setPriceList(safeData);
+                setOrder(safeData);
+                setError(null);
+            } catch (err) {
+                console.error("Error fetching data:", err);
+                setError(`Failed to load data: ${err.message}`);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        setIsLoading(true);
+        getData();
+    }, [model]); // Only depend on model
+
+    if (error) {
+        return (
+            <div>
+                <Alert variant="danger">{error}</Alert>
+            </div>
+        );
+    }
+
+    return isLoading ? (
+        <div>
+            <h1>Loading...</h1>
+        </div>
+    ) : (
         <Container fluid>
             <Tabs
-
                 defaultActiveKey="customerInfo"
                 id="fill-tab-example"
                 className="mb-12 nav-pills"

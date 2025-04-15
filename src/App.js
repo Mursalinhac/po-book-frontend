@@ -7,7 +7,8 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/App.css';
 import './css/imagehover.css';
-import './css/styles.css'
+import './css/styles.css';
+import './css/print.css';
 
 
 // 

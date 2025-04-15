@@ -1,6 +1,12 @@
+import React from "react";
 import {InputGroup, Form} from "react-bootstrap";
 
-const PricePreview = ({price, setOrder}) => {
+const PricePreview = ({price, setOrder = () => {}}) => {
+    // Handle the case when price or optionCodes is undefined/null
+    if (!price) {
+        return null;
+    }
+
     const handleChange = (event) => {
         const {name, value} = event.target
         let newPrice = price;
@@ -22,83 +28,66 @@ const PricePreview = ({price, setOrder}) => {
     }
     return (
         <>
-            <tr className="horizontal-rule"></tr>
+            {/* Pricing totals section */}
+            <tr className="subtotal-row">
+                <td colSpan="2"></td>
+                <td>TOTAL MSRP</td>
+                <td className="price-column">${price?.msrp || price?.subTotal || '0.00'}</td>
+            </tr>
+            
+            {/* Option code rows - these would come from the specific vehicle options */}
+            {price?.optionCodes && Array.isArray(price.optionCodes) && price.optionCodes.map((option, index) => (
+                <tr key={`option-${index}`}>
+                    <td>{option.code}</td>
+                    <td colSpan="2">{option.description}</td>
+                    <td className="price-column">${option.price || '0.00'}</td>
+                </tr>
+            ))}
+            
+            {/* Empty rows for spacing/additional items */}
             <tr>
-                <td><h6>Sub Total</h6></td>
-                <td></td>
-                <td></td>
-                <td className="price-cell">${price.subTotal}</td>
+                <td colSpan="3"></td>
+                <td className="price-column"></td>
             </tr>
             <tr>
-                <td><h6>Trade-in Value</h6></td>
-                <td></td>
-                <td></td>
-                <td className="price-cell">${price.misc}</td>
+                <td colSpan="3"></td>
+                <td className="price-column"></td>
             </tr>
             <tr>
-                <td><h6>Tax Percentage</h6></td>
-                <td className="price-cell ">
-                    <InputGroup hasValidation>
-                        <Form.Control
-                            className="w-25"
-                            size="sm"
-                            type="number"
-                            step="0.001"
-                            min="0"
-                            max="100"
-                            value={price.taxPercentage}
-                            name="taxPercentage"
-                            onChange={handleChange}/>%
-                    </InputGroup>
-                    {/*<input*/}
-                    {/*    type="number"*/}
-                    {/*    step="0.001"*/}
-                    {/*    min="0"*/}
-                    {/*    value={price.taxPercentage}*/}
-                    {/*    name="taxPercentage"*/}
-                    {/*    onChange={handleChange}*/}
-                    {/*/>%*/}
-                </td>
-                <td><h6>Tax</h6></td>
-                <td className="price-cell">${price.tax}</td>
+                <td colSpan="3"></td>
+                <td className="price-column"></td>
             </tr>
-
             <tr>
-                <td><h6>Documentation Fees</h6></td>
-                <td></td>
-                <td></td>
-                <td className="price-cell">${price.documentationFees}</td>
+                <td colSpan="3"></td>
+                <td className="price-column"></td>
             </tr>
-
             <tr>
-                <td><h6>Gaz Guzzler Tax</h6></td>
-                <td></td>
-                <td></td>
-                <td className="price-cell">
-                    <InputGroup hasValidation >
-                        <Form.Control
-                            $
-                            className="w-25 price-cell"
-                            size="sm"
-                            type="number"
-                            min="0"
-                            value={price.gasGuzzler}
-                            name="gasGuzzler"
-                            onChange={handleChange}/>
-                    </InputGroup>
+                <td colSpan="3"></td>
+                <td className="price-column"></td>
+            </tr>
+            <tr>
+                <td colSpan="3"></td>
+                <td className="price-column"></td>
+            </tr>
+            <tr>
+                <td colSpan="3"></td>
+                <td className="price-column"></td>
+            </tr>
+            
+            {/* Buyers must be signed notice */}
+            <tr className="notice-row">
+                <td colSpan="4" className="small-text">
+                    Buyers Order must be signed and the additional deposit here must be received within 5 days of the date shown above by Ciocca in order to maintain customer's position on C8 Corvette Stingray placement list
                 </td>
             </tr>
-            {/*<tr className="bordered"></tr>*/}
-
-            <tr className="horizontal-rule"></tr>
+            
+            {/* Initial box */}
             <tr>
-                <td><h3>Total</h3></td>
-                <td></td>
-                <td></td>
-                <td className="price-cell"><h4>${price.total}</h4></td>
+                <td colSpan="3" className="text-right">Initial</td>
+                <td className="initial-box"></td>
             </tr>
         </>
-    )
-}
+    );
+};
 
 export default PricePreview;
