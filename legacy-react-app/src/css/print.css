@@ -1,0 +1,386 @@
+/* Print Styles for PO Book */
+
+@media print {
+  /* General Print Settings */
+  body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Hide UI elements */
+  nav, button, .no-print, 
+  .sidebar, .header-controls, 
+  .footer-controls, .navigation-buttons {
+    display: none !important;
+  }
+
+  /* Show print-only elements */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Container styles */
+  .print-container {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  /* Header styles */
+  .print-header {
+    border-bottom: 2px solid #1a75bc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+
+  .company-logo {
+    max-height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .print-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1a75bc;
+    margin: 10px 0;
+  }
+
+  /* Section styles */
+  .print-section {
+    margin-bottom: 20px;
+    page-break-inside: avoid;
+    border: 1px solid #1a75bc;
+    border-radius: 4px;
+    padding: 15px;
+  }
+
+  .section-header {
+    background-color: #e6f1fa;
+    color: #1a75bc;
+    padding: 8px;
+    font-weight: bold;
+    border-bottom: 1px solid #1a75bc;
+    margin: -15px -15px 15px -15px;
+  }
+
+  /* Table styles */
+  table.print-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+  }
+
+  table.print-table th,
+  table.print-table td {
+    border: 1px solid #c6d8e4;
+    padding: 8px;
+    text-align: left;
+  }
+
+  table.print-table th {
+    background-color: #e6f1fa;
+    color: #1a75bc;
+    font-weight: bold;
+  }
+
+  /* Form field styles */
+  .form-field {
+    margin-bottom: 10px;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    color: #1a75bc;
+  }
+
+  /* Selected options */
+  .selected-options {
+    margin-top: 5px;
+  }
+
+  .option-item {
+    margin-bottom: 3px;
+  }
+
+  /* Page break control */
+  .page-break {
+    page-break-after: always;
+  }
+
+  /* Signatures and dates */
+  .signature-section {
+    margin-top: 30px;
+    border-top: 1px solid #1a75bc;
+    padding-top: 15px;
+  }
+
+  .signature-line {
+    border-top: 1px solid #666;
+    margin-top: 30px;
+    padding-top: 5px;
+    display: inline-block;
+    min-width: 200px;
+  }
+
+  /* Status indicators */
+  .status-approved {
+    color: #28a745;
+    font-weight: bold;
+  }
+
+  .status-pending {
+    color: #ffc107;
+    font-weight: bold;
+  }
+
+  .status-rejected {
+    color: #dc3545;
+    font-weight: bold;
+  }
+
+  /* Price summary section */
+  .price-summary {
+    margin-top: 20px;
+    font-weight: bold;
+  }
+
+  .total-price {
+    font-size: 18px;
+    color: #1a75bc;
+  }
+
+  /* Terms and conditions on the second page */
+  .terms-conditions {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+  }
+
+  /* Page numbers */
+  @page {
+    margin: 0.5in;
+  }
+
+  .page-number:before {
+    content: "Page " counter(page) " of " counter(pages);
+    font-size: 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  /* Second page watermark */
+  .page-2:after {
+    content: "Page 2";
+    font-size: 14px;
+    color: #ddd;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* Style for the print preview on screen */
+@media screen {
+    body.print-preview {
+        background-color: #f0f0f0;
+        padding: 20px;
+    }
+    
+    .print-container {
+        max-width: 8.5in;
+        margin: 0 auto;
+        background-color: white;
+        padding: 0.5in;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* All other styles same as print, but scope to .print-container */
+    .print-container .print-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #1a75bc;
+        padding-bottom: 10px;
+    }
+
+    .print-container .print-header img {
+        max-height: 50px;
+    }
+
+    .print-container .print-header .address {
+        text-align: right;
+        font-size: 9pt;
+    }
+
+    .print-container .print-section h2 {
+        background-color: #1a75bc;
+        color: white;
+        padding: 5px 10px;
+        margin: 0 0 10px 0;
+        font-size: 12pt;
+        text-align: center;
+        border-radius: 3px;
+    }
+
+    .print-container .print-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 15px;
+    }
+
+    .print-container .print-table th, 
+    .print-container .print-table td {
+        border: 1px solid #1a75bc;
+        padding: 5px;
+        text-align: left;
+        vertical-align: top;
+        font-size: 9pt;
+    }
+
+    .print-container .print-table th {
+        background-color: #1a75bc;
+        color: white;
+        font-weight: bold;
+    }
+
+    .print-container .price-column {
+        text-align: right;
+        white-space: nowrap;
+    }
+
+    .print-container .customer-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .print-container .customer-info-section {
+        border: 1px solid #1a75bc;
+        padding: 8px;
+        border-radius: 3px;
+    }
+
+    .print-container .customer-info-section h3 {
+        margin: 0 0 5px 0;
+        font-size: 10pt;
+        color: #1a75bc;
+    }
+
+    .print-container .customer-info-row {
+        display: flex;
+        margin-bottom: 5px;
+    }
+
+    .print-container .customer-info-label {
+        font-weight: bold;
+        min-width: 100px;
+    }
+
+    .print-container .governing-law {
+        border: 1px solid #1a75bc;
+        padding: 8px;
+        margin-bottom: 10px;
+        font-size: 8pt;
+        background-color: #f5f5f5;
+    }
+
+    .print-container .attachment-section {
+        border: 1px solid #1a75bc;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    .print-container .attachment-title {
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #1a75bc;
+        padding-bottom: 5px;
+    }
+
+    .print-container .po-buyer-notice {
+        background-color: #f5f5f5;
+        border: 1px solid #1a75bc;
+        padding: 8px;
+        margin-bottom: 15px;
+        font-weight: bold;
+        text-align: center;
+        font-size: 9pt;
+    }
+
+    .print-container .signature-section {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .print-container .signature-line {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #000;
+        padding-top: 5px;
+        margin-top: 20px;
+        font-size: 9pt;
+    }
+
+    .print-container .po-notice {
+        text-align: center;
+        font-size: 9pt;
+        margin: 15px 0;
+    }
+
+    .print-container .terms-section {
+        position: relative;
+        padding: 15px;
+    }
+    
+    .print-container .watermark {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 18pt;
+        color: #cccccc;
+        font-weight: bold;
+    }
+    
+    .print-container .terms-section h3 {
+        color: #1a75bc;
+        text-align: center;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #1a75bc;
+        padding-bottom: 5px;
+    }
+    
+    .print-container .terms-item {
+        margin-bottom: 10px;
+        font-size: 9pt;
+    }
+    
+    .print-container .terms-item-title {
+        font-weight: bold;
+    }
+    
+    /* Page break simulation for screen preview */
+    .print-container .page-break {
+        border-top: 2px dashed #999;
+        margin: 30px 0;
+        position: relative;
+    }
+    
+    .print-container .page-break:after {
+        content: "Page Break";
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f0f0f0;
+        padding: 0 10px;
+        font-size: 9pt;
+        color: #666;
+    }
+} 

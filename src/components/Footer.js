@@ -1,7 +1,3 @@
-import { Container, Navbar, Nav, NavDropdown, Card, Button, Row, Col } from "react-bootstrap";
-
-
-
 function Footer() {
     return (
 

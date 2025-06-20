@@ -1,13 +1,4 @@
 import React from "react";
-import {Col, Row, Form, Card} from "react-bootstrap";
-import Picture1 from "../images/PO book images/Picture1.png";
-import Picture2 from "../images/PO book images/Picture2.png";
-import Picture3 from "../images/PO book images/Picture3.png";
-import Picture4 from "../images/PO book images/Picture4.png";
-import Picture5 from "../images/PO book images/Picture5.png";
-import Picture6 from "../images/PO book images/Picture6.png";
-import Top from "../images/PO book images/top.png";
-import cioccaLogo from "../images/PO book images/top.png";
 
 function CustomerInfoPrint({customerInfo}) {
     return (

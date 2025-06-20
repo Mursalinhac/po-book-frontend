@@ -1,4 +1,4 @@
-import {Container, Row, Col, Card} from "react-bootstrap";
+import {Container, Row} from "react-bootstrap";
 
 function Order_Agreement() {
     return (<Container style={{
@@ -31,9 +31,9 @@ function Order_Agreement() {
                         AGREEMENT</strong> - Purchaser has the right/option and Dealer encourages Purchaser to
                     have an
                     attorney review all documents, before signing, which form a part of the transaction.
-                    Purchaser does not rely upon the Dealer or any of the Dealer's Representatives for any
+                    Purchaser does not rely upon the Dealer or any of the Dealer&apos;s Representatives for any
                     legal advice and/or assistance. Customer agrees to pay an amount equal to the total
-                    price, including Destination Charge, shown on this Buyer's Order. Customer also agrees
+                    price, including Destination Charge, shown on this Buyer&apos;s Order. Customer also agrees
                     to pay Ciocca Chevrolet for all applicable taxes, fees, and licensing costs and charges.
                     Non Refundable Deposit - If Dealer notifies Purchaser that the vehicle is ready for
                     delivery on or before December 31, 2023 and the purchaser refuses or fails for any

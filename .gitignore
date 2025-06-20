@@ -106,3 +106,45 @@ dist
 .DS_Store
 
 .idea
+
+# Python (prevent accidental addition)
+*.py
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+venv/
+env/
+.python-version
+*.egg-info/
+
+# Next.js additional
+.vercel/
+out/
+
+# Environment variables (additional patterns)
+.env.local
+.env.development
+.env.production
+.env.staging
+
+# IDE and editors
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+
+# Build artifacts (additional)
+dist/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.backup

@@ -1,0 +1,318 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-corvette-bg text-white;
+  }
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus indicators for better accessibility */
+.focus-visible {
+  @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-black;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .bg-black {
+    background-color: #000000 !important;
+  }
+  .text-white {
+    color: #ffffff !important;
+  }
+  .border-corvette-gray {
+    border-color: #ffffff !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Tailwind component layer for custom classes */
+@layer components {
+  /* Preserve existing po-book form styling */
+  .po-book-form {
+    @apply border-2 border-corvette-gray rounded-form p-form-padding text-form;
+  }
+
+  .po-book-form h1,
+  .po-book-form h2,
+  .po-book-form h3,
+  .po-book-form h4,
+  .po-book-form h5,
+  .po-book-form h6 {
+    @apply text-white text-center;
+  }
+
+  .po-book-form .form-check-input {
+    @apply bg-black border-corvette-gray;
+  }
+
+  .po-book-form .form-control.bg-dark {
+    @apply bg-black border border-corvette-gray;
+  }
+
+  .po-book-button {
+    @apply bg-black border border-corvette-gray text-white hover:bg-corvette-gray hover:text-black transition-colors duration-200;
+  }
+
+  .po-book-table {
+    @apply text-white border-collapse;
+  }
+
+  .po-book-table th {
+    @apply border-b border-corvette-gray pb-2 mb-2;
+  }
+
+  .po-book-table td {
+    @apply py-2 px-1;
+  }
+
+  .po-book-table .price-cell {
+    @apply text-right;
+  }
+
+  .po-book-table .price-cell input {
+    @apply bg-black text-white;
+  }
+
+  .preview-label {
+    @apply font-bold text-preview;
+  }
+
+  .preview-field {
+    @apply text-preview;
+  }
+
+  .horizontal-rule {
+    @apply mt-1 border-b border-white mb-1;
+  }
+
+  .white-text {
+    @apply text-white;
+  }
+
+  /* Vehicle card hover effect */
+  .effect-duke img,
+  .effect-duke p {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .effect-duke:hover img {
+    @apply opacity-10 scale-150;
+  }
+
+  .effect-duke p {
+    @apply text-corvette-gray font-bold absolute inset-0 flex items-center justify-center opacity-0;
+    font-size: 2rem;
+  }
+
+  .effect-duke:hover p {
+    @apply opacity-100 scale-100;
+  }
+
+  /* Tile layout system */
+  .tile-holder {
+    @apply w-full my-tile-gap mx-auto;
+    columns: 4;
+    column-gap: 20px;
+  }
+
+  .tile {
+    @apply w-full mb-tile-gap p-form-padding overflow-hidden;
+  }
+
+  .tile h4 {
+    @apply uppercase;
+  }
+
+  .box {
+    @apply w-2 h-2 border border-black;
+  }
+
+  /* Vehicle card styling improvements */
+  .card-demo {
+    @apply relative overflow-hidden;
+  }
+
+  .card-demo img {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+
+  .card-demo:hover img {
+    @apply scale-105;
+  }
+
+  /* Ensure proper text contrast on vehicle cards */
+  .card-demo h3 {
+    @apply drop-shadow-lg;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Image aspect ratio preservation */
+  .aspect-ratio-preserved {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Company logo aspect ratio preservation */
+  .company-logo {
+    object-fit: contain;
+    width: auto;
+    height: auto;
+  }
+}
+
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Additional styles that need to be preserved */
+input:not(:placeholder-shown):not([type=checkbox]):not([type=radio]) {
+    border: 2px transparent !important;
+}
+
+.po-book-form .form-check-input:checked[type=radio],
+.po-book-form .form-check-input:checked[type=checkbox] {
+    background-color: black;
+    border-color: black;
+}
+
+.form-control:focus {
+    color: white;
+}
+
+.bg-dark {
+    background-color: transparent;
+}
+
+/* Responsive breakpoints for tile layout */
+@media (min-width: 2000px) {
+    .tile-holder {
+        columns: 6;
+    }
+}
+
+@media (max-width: 1200px) {
+    .tile-holder {
+        columns: 3;
+        width: calc(100% - 40px);
+        box-sizing: border-box;
+        padding: 20px 20px 20px 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .tile-holder {
+        columns: 2;
+    }
+}
+
+@media (max-width: 480px) {
+    .tile-holder {
+        columns: 1;
+    }
+}
