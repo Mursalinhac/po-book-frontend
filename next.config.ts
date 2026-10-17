@@ -5,16 +5,13 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:3001/:path*'
+        destination: `${(process.env.API_URL || 'http://localhost:3001').replace(/\/$/, '')}/:path*`
       }
     ]
   },
   images: {
-    domains: ['localhost'],
-  },
-  // Enable experimental features for better performance
-  experimental: {
-    optimizePackageImports: ['@radix-ui/react-icons'],
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [{ protocol: 'http', hostname: 'localhost' }],
   },
 };
 

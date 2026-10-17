@@ -1,23 +1,25 @@
 import React from 'react';
 import OrderOption from "./OrderOption";
+import styles from './options.module.css';
 import { DealerInstalledProps } from '../types';
 
-const DealerInstalled: React.FC<DealerInstalledProps> = ({ options, onChange }) => {
+const DealerInstalled: React.FC<DealerInstalledProps & { exclude?: string[] }> = ({ options, onChange, exclude = [] }) => {
     // Safety check for undefined or null options
-    if (!options) {
+    if (!options || Object.keys(options).length === 0) {
         console.error('DealerInstalled received null or undefined options');
         return (
-            <div className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded" role="alert">
+            <div className="rounded-[var(--radius-control)] bg-[color-mix(in_oklch,var(--error)_12%,var(--surface))] px-4 py-3 text-[var(--fg)]" role="alert">
                 <span className="block sm:inline">No dealer options available</span>
             </div>
         );
     }
 
     return (
-        <div className="tile-holder">
-            {Object.entries(options || {}).map(([optionName, orderOption]) => (
+        <div className={styles.groups}>
+            {Object.entries(options).filter(([optionName, orderOption]) => !exclude.includes(optionName) && !exclude.includes(orderOption?.key)).map(([optionName, orderOption], index) => (
                 <OrderOption
                     key={optionName}
+                    index={index}
                     orderOption={orderOption}
                     onChange={onChange}
                     parentKey="dealerInstalled"

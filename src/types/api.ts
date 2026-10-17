@@ -17,6 +17,7 @@ export interface FactoryOptionGroup {
 }
 
 export interface FactoryOption {
+  id?: string;
   code: string;
   title: string;
   price: number;
@@ -32,6 +33,7 @@ export interface DealerOptionGroup {
 }
 
 export interface DealerOption {
+  id?: string;
   code: string;
   title: string;
   price: number;
@@ -39,6 +41,12 @@ export interface DealerOption {
 }
 
 export interface PriceStructure {
+  tradeInValue?: number;
+  dealerDocumentaryFees?: number;
+  DMV?: number;
+  misc?: number;
+  tradeInPayOff?: number;
+  amountOnDelivery?: number;
   basePrice?: number;
   additionalEquipment?: number;
   freightCharge?: number;
@@ -70,8 +78,7 @@ export interface OptionCode {
 
 // Health check response
 export interface HealthCheckResponse {
-  status: string;
-  timestamp: string;
+  message: string;
 }
 
 // API Response Types

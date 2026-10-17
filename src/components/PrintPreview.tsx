@@ -2,7 +2,8 @@ import React from "react";
 import Image from "next/image";
 import '../css/print.css';
 import Terms_Conditions from "./Terms_Conditions";
-import { PrintPreviewProps, FactoryOptionGroup, DealerOptionGroup, FactoryOption, DealerOption } from '../types';
+import { PrintPreviewProps, FactoryOptionGroup, DealerOptionGroup } from '../types';
+import { selectedOptions } from '../lib/order';
 // Using public path for Next.js
 const cioccaLogo = "/images/PO book images/top.png";
 
@@ -12,63 +13,35 @@ const PrintPreview: React.FC<PrintPreviewProps> = ({ order }) => {
         if (!category) return null;
 
         // Get all selected options from this category
-        const selectedOptions: React.JSX.Element[] = [];
+        const selectedOptionsRows: React.JSX.Element[] = [];
         
         // Iterate through each sub-category in this category
         Object.entries(category).forEach(([subCategoryKey, subCategory]: [string, FactoryOptionGroup | DealerOptionGroup]) => {
             // Skip if subCategory is null or undefined
             if (!subCategory) return;
             
-            // Check if this is a multi-select option with a "selected" object
-            if (subCategory.selected && typeof subCategory.selected === 'object') {
-                // For multi-select options, selected options are stored in an object
-                Object.entries(subCategory.selected as Record<string, FactoryOption | DealerOption>).forEach(([, option]: [string, FactoryOption | DealerOption]) => {
-                    if (option && option.title && option.code) {
-                        selectedOptions.push(
-                            <tr key={`${subCategoryKey}-${option.code}`}>
-                                <td>{option.code || ""}</td>
-                                <td>{option.title}</td>
-                                <td className="price-column">${parseFloat(String(option.price || 0)).toFixed(2)}</td>
-                            </tr>
-                        );
-                    }
-                });
-            } 
-            // Check if this is a single-select option that's been selected
-            else if (subCategory.selected && (subCategory.selected as FactoryOption | DealerOption).title) {
-                const option = subCategory.selected as FactoryOption | DealerOption;
-                selectedOptions.push(
-                    <tr key={`${subCategoryKey}-${option.code || option.title}`}>
-                        <td>{option.code || ""}</td>
+            selectedOptions(subCategory).forEach((option, index) => {
+                selectedOptionsRows.push(
+                    <tr key={`${subCategoryKey}-${option.id || index}`}>
+                        <td>{option.code || ''}</td>
                         <td>{option.title}</td>
-                        <td className="price-column">${parseFloat(String(option.price || 0)).toFixed(2)}</td>
+                        <td className="price-column">${Number(option.price || 0).toFixed(2)}</td>
                     </tr>
                 );
-            }
-            // For legacy format with options array
-            else if (subCategory.options && Array.isArray(subCategory.options)) {
-                // For each option in the subcategory
-                subCategory.options.forEach((option: FactoryOption | DealerOption) => {
-                    // Only include options that are selected
-                    if (option && option.title && option.selected) {
-                        selectedOptions.push(
-                            <tr key={`${subCategoryKey}-${option.code || option.title}`}>
-                                <td>{option.code || ""}</td>
-                                <td>{option.title}</td>
-                                <td className="price-column">${parseFloat(String(option.price || 0)).toFixed(2)}</td>
-                            </tr>
-                        );
-                    }
-                });
-            }
+            });
         });
         
-        return selectedOptions.length > 0 ? selectedOptions : null;
+        return selectedOptionsRows.length > 0 ? selectedOptionsRows : null;
     };
 
     // Conditional rendering for category sections (only show if they have selected options)
     const factoryOptions = renderCategoryOptions(order.factoryInstalled);
     const dealerOptions = renderCategoryOptions(order.dealerInstalled);
+    const equipmentTotal = (groups: Record<string, FactoryOptionGroup | DealerOptionGroup> | undefined) =>
+        Object.values(groups || {}).flatMap(selectedOptions).reduce((sum, option) => sum + Number(option.price || 0), 0);
+    const dealerTotal = equipmentTotal(order.dealerInstalled);
+    const basePrice = order.factoryInstalled?.model ? equipmentTotal({ model: order.factoryInstalled.model }) : 0;
+    const factoryEquipment = equipmentTotal(order.factoryInstalled) - basePrice;
 
     return (
         <div className="print-container">
@@ -98,21 +71,21 @@ const PrintPreview: React.FC<PrintPreviewProps> = ({ order }) => {
                         <h3>Customer Information</h3>
                         <div className="customer-info-row">
                             <div className="customer-info-label">Name:</div>
-                            <div>{order.customerInfo?.fullName || "N/A"}</div>
+                            <div>{order.customerInfo?.firstName || order.customerInfo?.fullName || "N/A"}</div>
                         </div>
                         <div className="customer-info-row">
                             <div className="customer-info-label">Address:</div>
-                            <div>{order.customerInfo?.address || "N/A"}</div>
+                            <div>{[order.customerInfo?.address1, order.customerInfo?.address2].filter(Boolean).join(", ") || order.customerInfo?.address || "N/A"}</div>
                         </div>
                         <div className="customer-info-row">
                             <div className="customer-info-label">City/State/Zip:</div>
                             <div>
-                                {order.customerInfo?.city || "N/A"}, {order.customerInfo?.state || ""} {order.customerInfo?.zipCode || ""}
+                                {order.customerInfo?.city || "N/A"}, {order.customerInfo?.state || ""} {order.customerInfo?.zipcode || order.customerInfo?.zipCode || ""}
                             </div>
                         </div>
                         <div className="customer-info-row">
                             <div className="customer-info-label">Phone:</div>
-                            <div>{order.customerInfo?.phone || "N/A"}</div>
+                            <div>{order.customerInfo?.number || order.customerInfo?.phone || "N/A"}</div>
                         </div>
                         <div className="customer-info-row">
                             <div className="customer-info-label">Email:</div>
@@ -132,7 +105,7 @@ const PrintPreview: React.FC<PrintPreviewProps> = ({ order }) => {
                         </div>
                         <div className="customer-info-row">
                             <div className="customer-info-label">Model:</div>
-                            <div>{order.customerInfo?.model || "Corvette"}</div>
+                            <div>{order.customerInfo?.model || order.model || "Corvette"}</div>
                         </div>
                         <div className="customer-info-row">
                             <div className="customer-info-label">VIN:</div>
@@ -158,24 +131,13 @@ const PrintPreview: React.FC<PrintPreviewProps> = ({ order }) => {
                         <tr>
                             <td></td>
                             <td>Base Price of Unit</td>
-                            <td className="price-column">${parseFloat(String(order.price?.basePrice || 0)).toFixed(2)}</td>
+                            <td className="price-column">${parseFloat(String(basePrice)).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>Additional Equipment (options)</td>
-                            <td className="price-column">${parseFloat(String(order.price?.additionalEquipment || 0)).toFixed(2)}</td>
+                            <td className="price-column">${parseFloat(String(factoryEquipment)).toFixed(2)}</td>
                         </tr>
-                        <tr>
-                            <td></td>
-                            <td>Destination Freight Charge</td>
-                            <td className="price-column">${parseFloat(String(order.price?.freightCharge || 0)).toFixed(2)}</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Floor Plan</td>
-                            <td className="price-column">${parseFloat(String(order.price?.floorPlan || 0)).toFixed(2)}</td>
-                        </tr>
-                        
                         {/* Factory Installed Options - only show if there are selected options */}
                         {factoryOptions && (
                             <>
@@ -198,21 +160,32 @@ const PrintPreview: React.FC<PrintPreviewProps> = ({ order }) => {
                         
                         {/* Price Calculations Section */}
                         <tr>
-                            <td colSpan={2} style={{textAlign: "right", fontWeight: "bold"}}>MSRP Total:</td>
-                            <td className="price-column">${parseFloat(String(order.price?.msrpTotal || 0)).toFixed(2)}</td>
+                            <td colSpan={2} style={{textAlign: "right", fontWeight: "bold"}}>Factory subtotal:</td>
+                            <td className="price-column">${parseFloat(String(equipmentTotal(order.factoryInstalled))).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td colSpan={2} style={{textAlign: "right", fontWeight: "bold"}}>Dealer Added Options:</td>
-                            <td className="price-column">${parseFloat(String(order.price?.dealerAddedOptions || 0)).toFixed(2)}</td>
+                            <td className="price-column">${parseFloat(String(dealerTotal)).toFixed(2)}</td>
                         </tr>
                         <tr>
-                            <td colSpan={2} style={{textAlign: "right", fontWeight: "bold"}}>Adjusted Vehicle Price:</td>
-                            <td className="price-column">${parseFloat(String(order.price?.adjustedVehiclePrice || 0)).toFixed(2)}</td>
+                            <td colSpan={2} style={{textAlign: "right", fontWeight: "bold"}}>Vehicle subtotal:</td>
+                            <td className="price-column">${parseFloat(String(order.price?.subTotal || 0)).toFixed(2)}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             
+            {order.tradeInfo && (order.tradeInfo.make || order.tradeInfo.vin) && (
+                <section className="print-section">
+                    <h3 className="section-header">Trade-in information</h3>
+                    <p>{[order.tradeInfo.year, order.tradeInfo.make, order.tradeInfo.model].filter(Boolean).join(' ')}</p>
+                    <p>VIN: {order.tradeInfo.vin || 'Not entered'}</p>
+                    <p>Trade value: ${Number(order.tradeInfo.tradeValue || 0).toFixed(2)}</p>
+                    <p>Balance owed: ${Number(order.tradeInfo.balanceOwed || 0).toFixed(2)}</p>
+                    <p>Trade-in amounts are recorded for review and are not applied to the vehicle totals.</p>
+                </section>
+            )}
+
             {/* Governing Law Section */}
             <div className="print-section">
                 <div className="section-header">Legal Information</div>
@@ -232,28 +205,28 @@ const PrintPreview: React.FC<PrintPreviewProps> = ({ order }) => {
                 <table className="print-table">
                     <tbody>
                         <tr>
-                            <td>TOTAL PRICE OF VEHICLE</td>
-                            <td className="price-column">${parseFloat(String(order.price?.total || 0)).toFixed(2)}</td>
+                            <td>Vehicle subtotal</td>
+                            <td className="price-column">${parseFloat(String(order.price?.subTotal || 0)).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td>Less Trade-In Allowance</td>
-                            <td className="price-column">${parseFloat(String(order.price?.tradeInAllowance || 0)).toFixed(2)}</td>
+                            <td className="price-column">${parseFloat(String(order.price?.tradeInValue || 0)).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td>Dealer Documentary Fee</td>
-                            <td className="price-column">${parseFloat(String(order.price?.documentaryFee || 0)).toFixed(2)}</td>
+                            <td className="price-column">${parseFloat(String(order.price?.dealerDocumentaryFees || 0)).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td><strong>TOTAL TAXABLE AMOUNT</strong></td>
-                            <td className="price-column">${parseFloat(String(order.price?.taxableAmount || 0)).toFixed(2)}</td>
+                            <td className="price-column">${parseFloat(String(order.price?.subTotal || 0)).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td>State Sales Tax</td>
-                            <td className="price-column">${parseFloat(String(order.price?.salesTax || 0)).toFixed(2)}</td>
+                            <td className="price-column">${parseFloat(String(order.price?.tax || 0)).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td><strong>TOTAL</strong></td>
-                            <td className="price-column total-price">${parseFloat(String(order.price?.grandTotal || 0)).toFixed(2)}</td>
+                            <td className="price-column total-price">${parseFloat(String(order.price?.total || 0)).toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td>Less Deposit</td>
@@ -261,7 +234,7 @@ const PrintPreview: React.FC<PrintPreviewProps> = ({ order }) => {
                         </tr>
                         <tr>
                             <td><strong>BALANCE DUE ON DELIVERY</strong></td>
-                            <td className="price-column">${parseFloat(String(order.price?.balanceDue || 0)).toFixed(2)}</td>
+                            <td className="price-column">${parseFloat(String((order.price?.total || 0) - (order.price?.deposit || 0))).toFixed(2)}</td>
                         </tr>
                     </tbody>
                 </table>

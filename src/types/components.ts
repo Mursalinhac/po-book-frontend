@@ -71,7 +71,7 @@ export interface TradeData {
   balanceOwed?: number;
   netTrade?: number;
   lienHolder?: string;
-  accountNumber?: number;
+  accountNumber?: string;
   infoFrom?: string;
   goodWill?: string;
 }
@@ -98,6 +98,7 @@ export interface OrderOptionProps {
 export interface PreviewProps {
   order: OrderData;
   setOrder: (updater: (prevState: OrderData) => OrderData) => void;
+  onEdit?: (step: import('../lib/order').StepId) => void;
 }
 
 export interface PricePreviewProps {

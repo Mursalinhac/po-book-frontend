@@ -1,150 +1,59 @@
 import React from 'react';
-import { Alert, AlertDescription } from "./ui/alert";
+import { ChevronDown } from 'lucide-react';
 import { OrderOptionProps } from '../types';
+import { optionId, selectedOptions, updateOptionSelection } from '../lib/order';
+import styles from './options.module.css';
 
-const OrderOption: React.FC<OrderOptionProps> = ({ orderOption, onChange, parentKey }) => {
-    // Safety check for undefined or null orderOption
-    if (!orderOption) {
-        console.error('OrderOption received null or undefined orderOption prop');
-        return (
-            <Alert variant="destructive">
-                <AlertDescription>Missing option data</AlertDescription>
-            </Alert>
-        );
-    }
+const money = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const anchor = (parentKey: string, key: string, index: number) => `${parentKey}-group-${key.replace(/[^a-zA-Z0-9]+/g, '-')}-${index}`;
 
-    // Safety check for missing options array
-    if (!orderOption.options || !Array.isArray(orderOption.options)) {
-        console.error('OrderOption received invalid options array', orderOption);
-        return (
-            <Alert variant="destructive">
-                <AlertDescription>Invalid option data</AlertDescription>
-            </Alert>
-        );
+const OrderOption: React.FC<OrderOptionProps & { index?: number }> = ({ orderOption, onChange, parentKey, index = 0 }) => {
+    if (!orderOption || !Array.isArray(orderOption.options)) {
+        return <div role="alert">This option group is unavailable.</div>;
     }
+    const selections = selectedOptions(orderOption);
+    const names = selections.map((s) => s.title).join(', ');
+    const total = selections.reduce((sum, s) => sum + (Number(s.price) || 0), 0);
+    const base = anchor(parentKey, orderOption.key, index);
     return (
-        <div className="tile">
-            <h4>{orderOption.title}</h4>
-            <form className="po-book-form">
-                {orderOption.options.map((option) => {
-                    // Skip options without a code
-                    if (!option || !option.code) {
-                        console.warn('Skipping option without code', option);
-                        return null;
-                    }
-                    return (
-                        <div key={option.code} className="flex items-center space-x-2 mb-2">
-                            <input
-                                type={orderOption.selectType === "multi" ? "checkbox" : "radio"}
-                                name={orderOption.key}
-                                id={option.code}
-                                value={option.code}
-                                className="form-check-input bg-black border-corvette-gray text-white focus:ring-blue-500"
-                                onChange={(event) => {
-                                if (orderOption.selectType === "multi") {
-                                    if (event.target.checked) {
-                                        onChange(previousState => {
-                                            // Ensure price exists and is a number
-                                            const optionPrice = typeof option.price === 'number' ? option.price : 0;
-                                            const currentSubTotal = previousState.price?.subTotal || 0;
-
-                                            const newPrice = {
-                                                ...previousState.price,
-                                                subTotal: currentSubTotal + optionPrice
-                                            }
-
-                                            // Safely calculate tax
-                                            const taxPercentage = newPrice.taxPercentage || 0;
-                                            newPrice.tax = Math.round(newPrice.subTotal * taxPercentage) / 100;
-                                            newPrice.total = newPrice.subTotal + newPrice.tax;
-                                            return {
-                                                ...previousState,
-                                                [parentKey]: {
-                                                    ...previousState[parentKey],
-                                                    [orderOption.key]: {
-                                                        ...previousState[parentKey]?.[orderOption.key],
-                                                        selected: {[option.code]: option, ...previousState[parentKey]?.[orderOption.key]?.selected}
-                                                    }
-                                                },
-                                                price: newPrice
-                                            }
-                                        })
-                                    } else {
-                                        onChange(previousState => {
-                                            const checkedOptions = previousState[parentKey]?.[orderOption.key]?.selected as Record<string, unknown>
-                                            if (checkedOptions) {
-                                                delete checkedOptions[option.code]
-                                            }
-
-                                            // Ensure price exists and is a number
-                                            const optionPrice = typeof option.price === 'number' ? option.price : 0;
-                                            const currentSubTotal = previousState.price?.subTotal || 0;
-
-                                            const newPrice = {
-                                                ...previousState.price,
-                                                subTotal: Math.max(0, currentSubTotal - optionPrice) // Prevent negative values
-                                            }
-
-                                            // Safely calculate tax
-                                            const taxPercentage = newPrice.taxPercentage || 0;
-                                            newPrice.tax = Math.round(newPrice.subTotal * taxPercentage) / 100;
-                                            newPrice.total = newPrice.subTotal + newPrice.tax;
-                                            return {
-                                                ...previousState,
-                                                [parentKey]: {
-                                                    ...previousState[parentKey],
-                                                    [orderOption.key]: {
-                                                        ...previousState[parentKey]?.[orderOption.key],
-                                                        selected: checkedOptions
-                                                    }
-                                                },
-                                                price: newPrice
-                                            }
-                                        })
-                                    }
-                                } else {
-                                    onChange(previousState => {
-                                        // Safely handle price calculations
-                                        const optionPrice = typeof option.price === 'number' ? option.price : 0;
-                                        const currentSubTotal = previousState.price?.subTotal || 0;
-                                        const selectedOption = previousState[parentKey]?.[orderOption.key]?.selected;
-                                        const selectedPrice = typeof selectedOption === 'object' && selectedOption && 'price' in selectedOption ? (typeof selectedOption.price === 'number' ? selectedOption.price : 0) : 0;
-
-                                        const newPrice = {
-                                            ...previousState.price,
-                                            subTotal: Math.max(0, currentSubTotal + optionPrice - selectedPrice)
-                                        }
-                                        // Safely calculate tax
-                                        const taxPercentage = newPrice.taxPercentage || 0;
-                                        newPrice.tax = Math.round(newPrice.subTotal * taxPercentage) / 100;
-                                        newPrice.total = newPrice.subTotal + newPrice.tax;
-                                        return {
-                                            ...previousState,
-                                            [parentKey]: {
-                                                ...previousState[parentKey],
-                                                [orderOption.key]: {
-                                                    ...previousState[parentKey]?.[orderOption.key],
-                                                    selected: option
-                                                }
-                                            },
-                                            price: newPrice
-                                        }
-                                    })
-                                }
-                                }}
-                            />
-                            <label
-                                htmlFor={option.code}
-                                className="text-white text-sm cursor-pointer"
-                            >
-                                {option.title}
-                            </label>
-                        </div>
-                    )
-                })}
-            </form>
-        </div>
+        <details className={styles.disclosure}>
+            <summary className={styles.summary}>
+                <span className={styles.summaryTitle}>{orderOption.title}</span>
+                <span className={styles.summaryMeta}>
+                    <span className={styles.summaryNames} title={names || undefined}>{names || 'None'}</span>
+                    {total > 0 && <span className={styles.summaryTotal}>{money.format(total)}</span>}
+                </span>
+                <ChevronDown className={styles.chevron} strokeWidth={1.5} aria-hidden="true" />
+            </summary>
+            <div role="group" id={base} aria-labelledby={`${base}-title`} className={styles.group}>
+                <div id={`${base}-title`} className={styles.srOnly}>{orderOption.title}</div>
+                <div className={styles.choices}>
+                    {orderOption.options.map((option) => {
+                        const id = optionId(orderOption, option);
+                        const inputId = `${parentKey}-${id}`;
+                        return (
+                            <div key={id} className={styles.choice}>
+                                <input
+                                    type={orderOption.selectType === 'multi' ? 'checkbox' : 'radio'}
+                                    name={`${parentKey}-${orderOption.key}`}
+                                    id={inputId}
+                                    value={id}
+                                    checked={selections.some((selected) => optionId(orderOption, selected) === id)}
+                                    onChange={(event) => {
+                                        const checked = event.currentTarget.checked;
+                                        onChange((previous) => updateOptionSelection(previous, parentKey, orderOption, option, checked));
+                                    }}
+                                />
+                                <label htmlFor={inputId}>
+                                    <span>{option.title}{option.code.trim() && <span className={styles.code}>{option.code.trim()}</span>}</span>
+                                    <span className={styles.price}>{money.format(option.price)}</span>
+                                </label>
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </details>
     );
 };
-
 export default OrderOption;
