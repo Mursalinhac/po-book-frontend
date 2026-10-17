@@ -1,7 +1,16 @@
+import localFont from 'next/font/local';
+import Script from 'next/script';
 import type { Metadata } from 'next';
 import "./globals.css";
 import Navigation from '../components/Navigation';
 import SkipLink from '../components/SkipLink';
+
+const geist = localFont({
+  src: '../../node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2',
+  variable: '--font-geist',
+  display: 'swap',
+  weight: '100 900',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -63,8 +72,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="bg-corvette-bg text-white font-sans">
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geist.variable} font-sans`}>
+        <Script id="theme-initialization" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: "try{var t=localStorage.getItem('po-book-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}" }} />
         <div id="root">
           <SkipLink href="#main-content">Skip to main content</SkipLink>
           <Navigation/>

@@ -4,13 +4,13 @@
 import { PriceListResponse, HealthCheckResponse, CreateOrderResponse, GetCustomersResponse } from '../types/api';
 import { OrderData } from '../types/components';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
 export class ApiClient {
   private baseURL: string;
 
   constructor() {
-    this.baseURL = API_BASE_URL;
+    this.baseURL = API_BASE_URL.replace(/\/$/, '');
   }
 
   /**
@@ -19,32 +19,38 @@ export class ApiClient {
    * @returns Promise<PriceListResponse>
    */
   async getPriceList(model: string): Promise<PriceListResponse> {
-    try {
-      const response = await fetch(`${this.baseURL}/pricelist/${model}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      
-      // Ensure data structure is safe
-      return {
-        ...data,
-        factoryInstalled: data.factoryInstalled || {},
-        dealerInstalled: data.dealerInstalled || {},
-        basePrice: data.basePrice || 0,
-        model: data.model || model,
-      };
-    } catch (error) {
-      console.error('Error fetching price list:', error);
-      throw error;
+    const response = await fetch(`${this.baseURL}/pricelist/${encodeURIComponent(model)}`, {
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!response.ok) {
+      const error = await response.json().catch(() => null);
+      throw new Error(error?.error || error?.message || `Unable to load price list (${response.status})`);
     }
+    const data = await response.json();
+    if (!data || !data.factoryInstalled || !data.dealerInstalled || !data.price ||
+        typeof data.price.subTotal !== 'number' || typeof data.price.taxPercentage !== 'number') {
+      throw new Error('Invalid price list received from server');
+    }
+    const normalizeGroups = (groups: PriceListResponse['factoryInstalled']) =>
+      Object.fromEntries(Object.entries(groups).map(([key, group]) => {
+        if (!group || !Array.isArray(group.options)) throw new Error('Invalid price list options');
+        return [key, {
+          ...group,
+          key,
+          options: group.options.map((option, index) => ({
+            ...option,
+            id: `${key}-${index}`,
+            code: String(option.code ?? ''),
+          })),
+        }];
+      }));
+    return {
+      ...data,
+      factoryInstalled: normalizeGroups(data.factoryInstalled),
+      dealerInstalled: normalizeGroups(data.dealerInstalled),
+      basePrice: data.basePrice || 0,
+      model: data.model || model,
+    };
   }
 
   /**

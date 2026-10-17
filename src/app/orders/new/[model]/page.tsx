@@ -63,5 +63,5 @@ export async function generateMetadata({ params }: OrderPageProps): Promise<Meta
 
 export default async function OrderPage({ params }: OrderPageProps) {
     const { model } = await params;
-    return <Order model={model}/>;
+    return <Order key={model} model={model}/>;
 }

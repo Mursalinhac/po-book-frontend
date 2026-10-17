@@ -1,0 +1,44 @@
+.groups { display: flex; flex-direction: column; gap: .5rem; }
+.disclosure { min-width: 0; }
+.summary { display: flex; align-items: center; gap: 1rem; width: 100%; min-height: 3.5rem; padding: .5rem 1rem; border-radius: var(--radius-control); background: var(--surface); cursor: pointer; list-style: none; transition: background-color var(--dur-fast) var(--ease-out); }
+.summary::-webkit-details-marker { display: none; }
+.summary:hover { background: var(--surface-raised); }
+.summary:focus-visible { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+.summaryTitle { flex: none; font-weight: 600; font-size: .9375rem; letter-spacing: -.02em; }
+.summaryMeta { flex: 1; min-width: 0; display: flex; justify-content: flex-end; align-items: baseline; gap: .75rem; font-size: .8125rem; color: var(--muted-fg); }
+.summaryNames { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.summaryTotal { flex: none; color: var(--fg); font-weight: 500; font-variant-numeric: tabular-nums; }
+.chevron { flex: none; width: 1.25rem; height: 1.25rem; color: var(--muted-fg); transition: transform var(--dur-fast) var(--ease-out); }
+.disclosure[open] > .summary .chevron { transform: rotate(180deg); }
+.group { min-width: 0; padding-top: .25rem; }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.choices { display: flex; flex-direction: column; gap: .125rem; margin-top: .25rem; }
+.choice { display: flex; align-items: flex-start; gap: .75rem; border-radius: var(--radius-control); padding: .625rem; min-height: 2.75rem; transition: background-color var(--dur-fast) var(--ease-out); }
+.choice:hover { background: var(--surface-raised); }
+.choice:has(input:checked) { background: var(--surface-raised); box-shadow: inset 0 0 0 2px var(--fg); }
+.choice:has(:focus-visible) { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+.choice input:focus-visible { outline: none; }
+.choice input { flex-shrink: 0; margin-top: .2rem; width: 1rem; height: 1rem; accent-color: var(--accent-color); }
+.choice label { width: 100%; cursor: pointer; display: grid; grid-template-columns: minmax(0,1fr) auto; gap: .75rem; font-size: .8125rem; line-height: 1.55; }
+.code { display: block; color: var(--muted-fg); font-size: .6875rem; margin-top: .125rem; font-variant-numeric: tabular-nums; }
+.price { white-space: nowrap; font-weight: 500; font-variant-numeric: tabular-nums; }
+
+/* Trim picker */
+.trimGroup + .trimGroup { margin-top: 1.5rem; }
+.trimGroup h3 { margin-bottom: .75rem; font-size: 1rem; font-weight: 600; color: var(--fg); }
+.trimStep { color: var(--muted-fg); font-size: .75rem; font-variant-numeric: tabular-nums; }
+.trimGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: .75rem; }
+.trim { position: relative; display: flex; min-width: 0; border-radius: var(--radius-core); background: var(--surface); transition: background-color var(--dur-fast) var(--ease-out); }
+.trim:hover { background: var(--surface-raised); }
+.trim:has(input:checked) { background: var(--surface-raised); box-shadow: inset 0 0 0 2px var(--fg); }
+.trim:has(:focus-visible) { outline: 2px solid var(--accent-color); outline-offset: 2px; }
+.trim input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.trim label { flex: 1; min-height: 8rem; display: flex; flex-direction: column; gap: .25rem; padding: 1rem 1rem 1rem 1.125rem; cursor: pointer; }
+.trimTitle { font-weight: 600; font-size: .9375rem; line-height: 1.35; letter-spacing: -.02em; padding-right: 1.75rem; }
+.trimCode { color: var(--muted-fg); font-size: .6875rem; font-variant-numeric: tabular-nums; }
+.trimPrice { margin-top: auto; padding-top: .75rem; font-size: 1.375rem; font-weight: 600; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.check { position: absolute; top: .875rem; right: .875rem; width: 1.25rem; height: 1.25rem; border-radius: 999px; background: var(--fg); color: var(--page); display: grid; place-items: center; opacity: 0; transform: scale(.8); transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+.trim:has(input:checked) .check { opacity: 1; transform: none; }
+
+@media (max-width: 640px) { .choice { padding: .75rem .5rem; } }
+@media (prefers-reduced-motion: reduce) { .chevron, .check, .trim, .choice, .summary { transition: none; } }

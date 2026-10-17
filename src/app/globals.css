@@ -1,318 +1,156 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss" source("../");
 
+@theme inline {
+  --font-sans: var(--font-geist), sans-serif;
+  --color-background: var(--page);
+  --color-foreground: var(--fg);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--fg);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--fg);
+  --color-primary: var(--accent-color);
+  --color-primary-foreground: var(--accent-ink);
+  --color-secondary: var(--surface-raised);
+  --color-secondary-foreground: var(--fg);
+  --color-muted: var(--surface-raised);
+  --color-muted-foreground: var(--muted-fg);
+  --color-accent: var(--surface-raised);
+  --color-accent-foreground: var(--fg);
+  --color-destructive: var(--error);
+  --color-destructive-foreground: var(--accent-ink);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-border: var(--line);
+  --color-input: var(--line);
+  --color-ring: var(--accent-color);
+  --color-corvette-dark: var(--surface);
+  --color-corvette-gray: var(--line);
+  --color-corvette-bg: var(--page);
+  --radius-lg: .75rem;
+  --radius-md: .5rem;
+  --radius-sm: .375rem;
+  --radius-form: .75rem;
+  --text-form: .875rem;
+  --text-preview: .875rem;
+  --spacing-form-padding: 1.5rem;
+  --spacing-tile-gap: 1.5rem;
+}
+
+:root {
+  color-scheme: light;
+  --page: oklch(0.955 0.006 25);
+  --surface: oklch(0.993 0.002 25);
+  --surface-raised: oklch(0.938 0.006 25);
+  --surface-sunken: oklch(0.945 0.006 25);
+  --fg: oklch(0.22 0.012 25);
+  --muted-fg: oklch(0.47 0.014 25);
+  --line: oklch(0.85 0.008 25);
+  --accent-color: oklch(0.22 0.012 25);
+  --accent-ink: oklch(0.985 0.004 25);
+  --error: oklch(0.5 0.19 22);
+  --shadow-float: 0 12px 32px -12px oklch(0.3 0.03 25 / .22);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-fast: 180ms;
+  --dur: 320ms;
+  --radius-shell: 1.5rem;
+  --radius-core: calc(1.5rem - .375rem);
+  --radius-control: .625rem;
+  /* Layer scale: order summary 20, navigation 30 (open mobile menu covers summary). */
+  --nav-h: 4.5rem;
+  --layer-navigation: 30;
+  --layer-summary: 20;
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: oklch(0.155 0.008 25);
+  --surface: oklch(0.195 0.009 25);
+  --surface-raised: oklch(0.245 0.011 25);
+  --surface-sunken: oklch(0.13 0.007 25);
+  --fg: oklch(0.95 0.006 25);
+  --muted-fg: oklch(0.73 0.012 25);
+  --line: oklch(0.33 0.012 25);
+  --accent-color: oklch(0.95 0.006 25);
+  --accent-ink: oklch(0.17 0.008 25);
+  --error: oklch(0.74 0.14 22);
+  --shadow-float: 0 16px 40px -12px oklch(0.05 0.01 25 / .7);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --page: oklch(0.155 0.008 25);
+    --surface: oklch(0.195 0.009 25);
+    --surface-raised: oklch(0.245 0.011 25);
+    --surface-sunken: oklch(0.13 0.007 25);
+    --fg: oklch(0.95 0.006 25);
+    --muted-fg: oklch(0.73 0.012 25);
+    --line: oklch(0.33 0.012 25);
+    --accent-color: oklch(0.95 0.006 25);
+    --accent-ink: oklch(0.17 0.008 25);
+    --error: oklch(0.74 0.14 22);
+    --shadow-float: 0 16px 40px -12px oklch(0.05 0.01 25 / .7);
+  }
+}
+/* Paper is always light, whatever the screen theme. */
+@media print {
+  :root, :root[data-theme="dark"], :root:not([data-theme="light"]) {
+    color-scheme: light;
+    --page: oklch(0.955 0.006 25);
+    --surface: oklch(0.993 0.002 25);
+    --surface-raised: oklch(0.938 0.006 25);
+    --surface-sunken: oklch(0.945 0.006 25);
+    --fg: oklch(0.22 0.012 25);
+    --muted-fg: oklch(0.47 0.014 25);
+    --line: oklch(0.85 0.008 25);
+    --accent-color: oklch(0.22 0.012 25);
+    --accent-ink: oklch(0.985 0.004 25);
+    --error: oklch(0.5 0.19 22);
+  }
+}
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-  }
+  * { border-color: var(--line); }
+  html { scrollbar-gutter: stable; }
+  body { margin: 0; background: var(--page); color: var(--fg); font-family: var(--font-geist), sans-serif; font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+  button, input, select, textarea { font: inherit; }
+  button, summary { cursor: pointer; }
+  button:disabled { cursor: not-allowed; }
+  :focus-visible { outline: 2px solid var(--accent-color); outline-offset: 4px; }
+  input:focus-visible, select:focus-visible { outline-offset: 2px; }
+  h1,h2,h3,h4 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--accent-color); color: var(--accent-ink); }
 }
-
-@layer base {
-  body {
-    @apply bg-corvette-bg text-white;
-  }
-}
-
-/* Screen reader only content */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-/* Focus indicators for better accessibility */
-.focus-visible {
-  @apply outline-none ring-2 ring-blue-500 ring-offset-2 ring-offset-black;
-}
-
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .bg-black {
-    background-color: #000000 !important;
-  }
-  .text-white {
-    color: #ffffff !important;
-  }
-  .border-corvette-gray {
-    border-color: #ffffff !important;
-  }
-}
-
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Tailwind component layer for custom classes */
 @layer components {
-  /* Preserve existing po-book form styling */
-  .po-book-form {
-    @apply border-2 border-corvette-gray rounded-form p-form-padding text-form;
-  }
-
-  .po-book-form h1,
-  .po-book-form h2,
-  .po-book-form h3,
-  .po-book-form h4,
-  .po-book-form h5,
-  .po-book-form h6 {
-    @apply text-white text-center;
-  }
-
-  .po-book-form .form-check-input {
-    @apply bg-black border-corvette-gray;
-  }
-
-  .po-book-form .form-control.bg-dark {
-    @apply bg-black border border-corvette-gray;
-  }
-
-  .po-book-button {
-    @apply bg-black border border-corvette-gray text-white hover:bg-corvette-gray hover:text-black transition-colors duration-200;
-  }
-
-  .po-book-table {
-    @apply text-white border-collapse;
-  }
-
-  .po-book-table th {
-    @apply border-b border-corvette-gray pb-2 mb-2;
-  }
-
-  .po-book-table td {
-    @apply py-2 px-1;
-  }
-
-  .po-book-table .price-cell {
-    @apply text-right;
-  }
-
-  .po-book-table .price-cell input {
-    @apply bg-black text-white;
-  }
-
-  .preview-label {
-    @apply font-bold text-preview;
-  }
-
-  .preview-field {
-    @apply text-preview;
-  }
-
-  .horizontal-rule {
-    @apply mt-1 border-b border-white mb-1;
-  }
-
-  .white-text {
-    @apply text-white;
-  }
-
-  /* Vehicle card hover effect */
-  .effect-duke img,
-  .effect-duke p {
-    @apply transition-all duration-300 ease-out;
-  }
-
-  .effect-duke:hover img {
-    @apply opacity-10 scale-150;
-  }
-
-  .effect-duke p {
-    @apply text-corvette-gray font-bold absolute inset-0 flex items-center justify-center opacity-0;
-    font-size: 2rem;
-  }
-
-  .effect-duke:hover p {
-    @apply opacity-100 scale-100;
-  }
-
-  /* Tile layout system */
-  .tile-holder {
-    @apply w-full my-tile-gap mx-auto;
-    columns: 4;
-    column-gap: 20px;
-  }
-
-  .tile {
-    @apply w-full mb-tile-gap p-form-padding overflow-hidden;
-  }
-
-  .tile h4 {
-    @apply uppercase;
-  }
-
-  .box {
-    @apply w-2 h-2 border border-black;
-  }
-
-  /* Vehicle card styling improvements */
-  .card-demo {
-    @apply relative overflow-hidden;
-  }
-
-  .card-demo img {
-    @apply transition-transform duration-300 ease-in-out;
-  }
-
-  .card-demo:hover img {
-    @apply scale-105;
-  }
-
-  /* Ensure proper text contrast on vehicle cards */
-  .card-demo h3 {
-    @apply drop-shadow-lg;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
-  }
-
-  /* Image aspect ratio preservation */
-  .aspect-ratio-preserved {
-    object-fit: cover;
-    object-position: center;
-  }
-
-  /* Company logo aspect ratio preservation */
-  .company-logo {
-    object-fit: contain;
-    width: auto;
-    height: auto;
-  }
+  .po-book-form { padding: clamp(1.5rem, 3.5vw, 2.5rem); border-radius: var(--radius-shell); background: var(--surface); }
+  .form-heading { margin: 0 0 .5rem; font-size: 1.125rem; font-weight: 600; letter-spacing: -.035em; }
+  .form-intro { margin: 0 0 1.75rem; color: var(--muted-fg); font-size: .875rem; line-height: 1.6; max-width: 65ch; }
+  .po-book-table { width: 100%; border-collapse: collapse; color: var(--fg); font-size: .875rem; }
+  .po-book-table th { padding: .75rem; color: var(--muted-fg); text-align: left; font-size: .75rem; font-weight: 500; border-bottom: 1px solid var(--line); }
+  .po-book-table td { padding: .875rem .75rem; vertical-align: top; }
+  .po-book-table .price-cell, .po-book-table .price-column { text-align: right; white-space: nowrap; }
+  .po-book-table .subtotal-row { border-top: 1px solid var(--line); }
+  .po-book-table .subtotal-row th { font-size: .9375rem; font-weight: 600; color: var(--fg); border: 0; }
+  .po-book-button { min-height: 2.75rem; }
+  .preview-label { color: var(--muted-fg); font-size: .8125rem; }
+  .preview-field { color: var(--fg); overflow-wrap: anywhere; }
+  .horizontal-rule { margin-block: 1.5rem; border-bottom: 1px solid var(--line); }
+  .company-logo { object-fit: contain; width: auto; height: auto; }
+  .tile-holder { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.25rem; align-items: start; }
+  .tile { min-width: 0; padding: 1.5rem; border-radius: var(--radius-shell); background: var(--surface); }
+  .empty-page { max-width: 60rem; margin: 4rem auto; padding: clamp(2rem, 5vw, 4rem); border-radius: var(--radius-shell); background: var(--surface); text-align: left; }
+  .empty-page h1 { font-size: clamp(1.75rem, 5vw, 3rem); line-height: 1.05; letter-spacing: -.045em; font-weight: 600; margin-bottom: 1rem; }
+  .empty-page p { max-width: 60ch; color: var(--muted-fg); line-height: 1.7; margin-bottom: 1.5rem; }
 }
-
-.App {
-    text-align: center;
-}
-
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .rise { animation: rise 560ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms); }
 }
-
-.App-header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+@media (max-width: 767px) {
+  .tile-holder { grid-template-columns: minmax(0,1fr); }
+  .empty-page { margin: 1.5rem 1rem; padding: 1.5rem; }
 }
-
-.App-link {
-    color: #61dafb;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/* Additional styles that need to be preserved */
-input:not(:placeholder-shown):not([type=checkbox]):not([type=radio]) {
-    border: 2px transparent !important;
-}
-
-.po-book-form .form-check-input:checked[type=radio],
-.po-book-form .form-check-input:checked[type=checkbox] {
-    background-color: black;
-    border-color: black;
-}
-
-.form-control:focus {
-    color: white;
-}
-
-.bg-dark {
-    background-color: transparent;
-}
-
-/* Responsive breakpoints for tile layout */
-@media (min-width: 2000px) {
-    .tile-holder {
-        columns: 6;
-    }
-}
-
-@media (max-width: 1200px) {
-    .tile-holder {
-        columns: 3;
-        width: calc(100% - 40px);
-        box-sizing: border-box;
-        padding: 20px 20px 20px 0;
-    }
-}
-
-@media (max-width: 768px) {
-    .tile-holder {
-        columns: 2;
-    }
-}
-
-@media (max-width: 480px) {
-    .tile-holder {
-        columns: 1;
-    }
+@media (forced-colors: active) {
+  input, button, select { forced-color-adjust: auto; }
 }

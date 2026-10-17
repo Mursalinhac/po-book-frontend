@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
@@ -9,6 +9,7 @@ import { CustomerInfoProps } from '../types';
 
 const CustomerInfo: React.FC<CustomerInfoProps> = ({ onChange }) => {
     const form = useForm<CustomerInfoFormData>({
+        mode: 'onBlur',
         resolver: zodResolver(customerInfoSchema),
         defaultValues: {
             firstName: "",
@@ -24,8 +25,8 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ onChange }) => {
     });
 
     // Watch form values and update parent state
-    const watchedValues = form.watch();
-    const previousValuesRef = useRef<CustomerInfoFormData | undefined>(undefined);
+    const watchedValues = useWatch({ control: form.control });
+    const previousValuesRef = useRef<Partial<CustomerInfoFormData> | undefined>(undefined);
 
     // Memoize the onChange callback to prevent unnecessary re-renders
     const handleChange = useCallback((values: CustomerInfoFormData) => {
@@ -43,32 +44,34 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ onChange }) => {
 
         if (hasChanged) {
             previousValuesRef.current = watchedValues;
-            handleChange(watchedValues);
+            handleChange(form.getValues());
         }
-    }, [watchedValues, handleChange]);
+    }, [watchedValues, handleChange, form]);
 
     return (
-        <div className="po-book-form">
+        <div className="po-book-form @container">
+            <p className="form-intro">Enter the customer and dealership information for this purchase order.</p>
             <Form {...form}>
                 <form
-                    className="space-y-6"
+                    className="flex flex-col gap-5"
+                    onSubmit={(event) => event.preventDefault()}
                     aria-label={ARIA_LABELS.customerInfoForm}
                     role="form"
                 >
                     <div className="sr-only" aria-live="polite" id="customer-form-status">
                         Customer information form. Fill out all required fields.
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-4 gap-y-5">
                         <FormField
                             control={form.control}
                             name="firstName"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.customerName.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.customerName.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="Customer Name"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="firstName-description"
                                             {...field}
                                         />
@@ -86,11 +89,11 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ onChange }) => {
                             name="stock"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.stock.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.stock.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="Stock"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="stock-description"
                                             {...field}
                                         />
@@ -108,11 +111,11 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ onChange }) => {
                             name="salesperson"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.salesperson.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.salesperson.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="Salesperson"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="salesperson-description"
                                             {...field}
                                         />
@@ -126,17 +129,17 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ onChange }) => {
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 @md:grid-cols-2 @4xl:grid-cols-4 gap-x-4 gap-y-5">
                         <FormField
                             control={form.control}
                             name="address1"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.address.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.address.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="1234 Main St"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="address1-description"
                                             {...field}
                                         />
@@ -154,11 +157,11 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ onChange }) => {
                             name="city"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.city.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.city.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="City"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="city-description"
                                             {...field}
                                         />
@@ -176,11 +179,11 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ onChange }) => {
                             name="state"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.state.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.state.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="State"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="state-description"
                                             {...field}
                                         />
@@ -198,11 +201,11 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ onChange }) => {
                             name="zipcode"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.zipcode.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.zipcode.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="Zip code"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="zipcode-description"
                                             {...field}
                                         />
@@ -216,18 +219,18 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ onChange }) => {
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 @md:grid-cols-2 gap-x-4 gap-y-5">
                         <FormField
                             control={form.control}
                             name="number"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.phone.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.phone.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="tel"
                                             placeholder="Mobile Phone"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="number-description"
                                             {...field}
                                         />
@@ -245,12 +248,12 @@ const CustomerInfo: React.FC<CustomerInfoProps> = ({ onChange }) => {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.email.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.email.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="email"
                                             placeholder="Enter email"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="email-description"
                                             {...field}
                                         />

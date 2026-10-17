@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useCallback } from 'react';
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
 import { Input } from "./ui/input";
@@ -9,8 +9,10 @@ import { tradeInfoSchema, TradeInfoFormData } from "../lib/validations";
 import { ARIA_LABELS } from "../lib/accessibility";
 import { TradeInfoProps, TradeData } from '../types';
 
-const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
+const TradeInfo: React.FC<TradeInfoProps> = ({ onChange, setOrder }) => {
+    const updateOrder = onChange || setOrder;
     const form = useForm<TradeInfoFormData>({
+        mode: 'onBlur',
         resolver: zodResolver(tradeInfoSchema),
         defaultValues: {
             year: "",
@@ -30,12 +32,12 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
     });
 
     // Watch form values and update parent state
-    const watchedValues = form.watch();
-    const previousValuesRef = useRef<TradeInfoFormData | undefined>(undefined);
+    const watchedValues = useWatch({ control: form.control });
+    const previousValuesRef = useRef<Partial<TradeInfoFormData> | undefined>(undefined);
 
     // Memoize the onChange callback to prevent unnecessary re-renders
     const handleChange = useCallback((values: TradeInfoFormData) => {
-        if (onChange) {
+        if (updateOrder) {
             // Convert form data to match TradeData interface
             const tradeData: TradeData = {
                 year: values.year ? parseInt(values.year, 10) : undefined,
@@ -48,17 +50,17 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                 balanceOwed: values.balanceOwed ? parseFloat(values.balanceOwed) : undefined,
                 netTrade: values.netTrade ? parseFloat(values.netTrade) : undefined,
                 lienHolder: values.balanceOwedTo,
-                accountNumber: values.accountNumber ? parseInt(values.accountNumber, 10) : undefined,
+                accountNumber: values.accountNumber,
                 infoFrom: values.infoFrom,
                 goodWill: values.goodWill,
             };
 
-            onChange((previousState) => ({
+            updateOrder((previousState) => ({
                 ...previousState,
                 tradeInfo: tradeData,
             }));
         }
-    }, [onChange]);
+    }, [updateOrder]);
 
     useEffect(() => {
         // Deep comparison to check if values actually changed
@@ -66,32 +68,34 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
 
         if (hasChanged) {
             previousValuesRef.current = watchedValues;
-            handleChange(watchedValues);
+            handleChange(form.getValues());
         }
-    }, [watchedValues, handleChange]);
+    }, [watchedValues, handleChange, form]);
     return (
-        <div className="po-book-form">
+        <div className="po-book-form @container">
+            <p className="form-intro">Record the trade-in vehicle for review. These amounts do not change the vehicle totals.</p>
             <Form {...form}>
                 <form
-                    className="space-y-6"
+                    className="flex flex-col gap-5"
+                    onSubmit={(event) => event.preventDefault()}
                     aria-label={ARIA_LABELS.tradeInfoForm}
                     role="form"
                 >
                     <div className="sr-only" aria-live="polite" id="trade-form-status">
                         Trade-in vehicle information form. Fill out all required fields.
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 @md:grid-cols-2 @4xl:grid-cols-4 gap-x-4 gap-y-5">
                         <FormField
                             control={form.control}
                             name="year"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.tradeYear.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.tradeYear.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
                                             placeholder="Year"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="year-description"
                                             {...field}
                                         />
@@ -109,11 +113,11 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                             name="make"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.tradeMake.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.tradeMake.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="Make"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="make-description"
                                             {...field}
                                         />
@@ -131,11 +135,11 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                             name="model"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.tradeModel.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.tradeModel.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="Model"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="model-description"
                                             {...field}
                                         />
@@ -153,11 +157,11 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                             name="color"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.tradeColor.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.tradeColor.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="Color"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="color-description"
                                             {...field}
                                         />
@@ -170,17 +174,17 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                             )}
                         />
                     </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 @md:grid-cols-2 gap-x-4 gap-y-5">
                         <FormField
                             control={form.control}
                             name="vin"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.tradeVin.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.tradeVin.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="VIN"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="vin-description"
                                             maxLength={17}
                                             {...field}
@@ -199,12 +203,12 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                             name="miles"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">{ARIA_LABELS.tradeMiles.label}</FormLabel>
+                                    <FormLabel className="text-foreground">{ARIA_LABELS.tradeMiles.label}</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
                                             placeholder="Miles"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500 focus-visible"
+
                                             aria-describedby="miles-description"
                                             {...field}
                                         />
@@ -218,18 +222,18 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 @md:grid-cols-2 @3xl:grid-cols-3 gap-x-4 gap-y-5">
                         <FormField
                             control={form.control}
                             name="tradeValue"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">Trade Value</FormLabel>
+                                    <FormLabel className="text-foreground">Trade Value</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
                                             placeholder="Trade Value"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500"
+
                                             {...field}
                                         />
                                     </FormControl>
@@ -243,12 +247,12 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                             name="balanceOwed"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">Balance Owed</FormLabel>
+                                    <FormLabel className="text-foreground">Balance Owed</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
                                             placeholder="Balance Owed"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500"
+
                                             {...field}
                                         />
                                     </FormControl>
@@ -262,12 +266,12 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                             name="netTrade"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">Net Trade</FormLabel>
+                                    <FormLabel className="text-foreground">Net Trade</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
                                             placeholder="Net Trade"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500"
+
                                             {...field}
                                         />
                                     </FormControl>
@@ -277,17 +281,17 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 gap-4">
+                    <div className="grid grid-cols-1 gap-x-4 gap-y-5">
                         <FormField
                             control={form.control}
                             name="balanceOwedTo"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">Balance Owed to</FormLabel>
+                                    <FormLabel className="text-foreground">Balance Owed to</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="Balance Owed to"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500"
+
                                             {...field}
                                         />
                                     </FormControl>
@@ -297,18 +301,18 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 @md:grid-cols-2 gap-x-4 gap-y-5">
                         <FormField
                             control={form.control}
                             name="accountNumber"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">Account Number</FormLabel>
+                                    <FormLabel className="text-foreground">Account Number</FormLabel>
                                     <FormControl>
                                         <Input
-                                            type="number"
+                                            type="text"
                                             placeholder="Account Number"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500"
+
                                             {...field}
                                         />
                                     </FormControl>
@@ -322,11 +326,11 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                             name="infoFrom"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">Info From</FormLabel>
+                                    <FormLabel className="text-foreground">Info From</FormLabel>
                                     <FormControl>
                                         <Input
                                             placeholder="Info From"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500"
+
                                             {...field}
                                         />
                                     </FormControl>
@@ -336,18 +340,18 @@ const TradeInfo: React.FC<TradeInfoProps> = ({ onChange }) => {
                         />
                     </div>
 
-                    <div className="grid grid-cols-1 gap-4">
+                    <div className="grid grid-cols-1 gap-x-4 gap-y-5">
                         <FormField
                             control={form.control}
                             name="goodWill"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel className="text-white">Good Will</FormLabel>
+                                    <FormLabel className="text-foreground">Good Will</FormLabel>
                                     <FormControl>
                                         <Input
                                             type="number"
                                             placeholder="Good Will"
-                                            className="bg-black text-white border-corvette-gray focus:border-blue-500"
+
                                             {...field}
                                         />
                                     </FormControl>

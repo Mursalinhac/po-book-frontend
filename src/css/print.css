@@ -31,7 +31,7 @@
 
   /* Header styles */
   .print-header {
-    border-bottom: 2px solid #1a75bc;
+    border-bottom: 2px solid #343b46;
     padding-bottom: 10px;
     margin-bottom: 20px;
   }
@@ -47,7 +47,7 @@
   .print-title {
     font-size: 22px;
     font-weight: bold;
-    color: #1a75bc;
+    color: #343b46;
     margin: 10px 0;
   }
 
@@ -55,17 +55,17 @@
   .print-section {
     margin-bottom: 20px;
     page-break-inside: avoid;
-    border: 1px solid #1a75bc;
+    border: 1px solid #343b46;
     border-radius: 4px;
     padding: 15px;
   }
 
   .section-header {
-    background-color: #e6f1fa;
-    color: #1a75bc;
+    background-color: #eff1f4;
+    color: #343b46;
     padding: 8px;
     font-weight: bold;
-    border-bottom: 1px solid #1a75bc;
+    border-bottom: 1px solid #343b46;
     margin: -15px -15px 15px -15px;
   }
 
@@ -84,8 +84,8 @@
   }
 
   table.print-table th {
-    background-color: #e6f1fa;
-    color: #1a75bc;
+    background-color: #eff1f4;
+    color: #343b46;
     font-weight: bold;
   }
 
@@ -96,7 +96,7 @@
   
   .form-label {
     font-weight: bold;
-    color: #1a75bc;
+    color: #343b46;
   }
 
   /* Selected options */
@@ -116,7 +116,7 @@
   /* Signatures and dates */
   .signature-section {
     margin-top: 30px;
-    border-top: 1px solid #1a75bc;
+    border-top: 1px solid #343b46;
     padding-top: 15px;
   }
 
@@ -152,7 +152,7 @@
 
   .total-price {
     font-size: 18px;
-    color: #1a75bc;
+    color: #343b46;
   }
 
   /* Terms and conditions on the second page */
@@ -207,7 +207,7 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 15px;
-        border-bottom: 2px solid #1a75bc;
+        border-bottom: 2px solid #343b46;
         padding-bottom: 10px;
     }
 
@@ -224,7 +224,7 @@
     }
 
     .print-container .print-section h2 {
-        background-color: #1a75bc;
+        background-color: #343b46;
         color: white;
         padding: 5px 10px;
         margin: 0 0 10px 0;
@@ -241,7 +241,7 @@
 
     .print-container .print-table th, 
     .print-container .print-table td {
-        border: 1px solid #1a75bc;
+        border: 1px solid #343b46;
         padding: 5px;
         text-align: left;
         vertical-align: top;
@@ -249,7 +249,7 @@
     }
 
     .print-container .print-table th {
-        background-color: #1a75bc;
+        background-color: #343b46;
         color: white;
         font-weight: bold;
     }
@@ -267,7 +267,7 @@
     }
 
     .print-container .customer-info-section {
-        border: 1px solid #1a75bc;
+        border: 1px solid #343b46;
         padding: 8px;
         border-radius: 3px;
     }
@@ -275,7 +275,7 @@
     .print-container .customer-info-section h3 {
         margin: 0 0 5px 0;
         font-size: 10pt;
-        color: #1a75bc;
+        color: #343b46;
     }
 
     .print-container .customer-info-row {
@@ -289,7 +289,7 @@
     }
 
     .print-container .governing-law {
-        border: 1px solid #1a75bc;
+        border: 1px solid #343b46;
         padding: 8px;
         margin-bottom: 10px;
         font-size: 8pt;
@@ -297,7 +297,7 @@
     }
 
     .print-container .attachment-section {
-        border: 1px solid #1a75bc;
+        border: 1px solid #343b46;
         padding: 10px;
         margin-bottom: 15px;
     }
@@ -306,13 +306,13 @@
         font-weight: bold;
         text-align: center;
         margin-bottom: 10px;
-        border-bottom: 1px solid #1a75bc;
+        border-bottom: 1px solid #343b46;
         padding-bottom: 5px;
     }
 
     .print-container .po-buyer-notice {
         background-color: #f5f5f5;
-        border: 1px solid #1a75bc;
+        border: 1px solid #343b46;
         padding: 8px;
         margin-bottom: 15px;
         font-weight: bold;
@@ -355,10 +355,10 @@
     }
     
     .print-container .terms-section h3 {
-        color: #1a75bc;
+        color: #343b46;
         text-align: center;
         margin-bottom: 15px;
-        border-bottom: 1px solid #1a75bc;
+        border-bottom: 1px solid #343b46;
         padding-bottom: 5px;
     }
     
@@ -389,4 +389,21 @@
         font-size: 9pt;
         color: #666;
     }
-} 
+}
+
+/* Keep paper text readable inside the application's dark theme. */
+.print-container {
+  color: #252830;
+  color-scheme: light;
+}
+@media screen and (max-width: 767px) {
+  .print-container {
+    min-width: 42rem;
+  }
+}
+
+/* Legal text flows naturally across pages; original wording is preserved. */
+.print-container .card { height: auto !important; margin-bottom: 1rem; }
+.print-container .card-body { padding: .5rem 0; }
+.print-container .row { display: block; margin: 0; }
+.print-container p { text-wrap: pretty; }
